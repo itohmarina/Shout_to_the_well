@@ -28,7 +28,7 @@
 でも、もやもやした気持ちを全部我慢していたら、そのうち自分がパンクしてしまう。それなら、悪口が返ってこないところに投稿しよう。文章を考えながら、自分の気持ちも整理しよう。
 
 ## 設計書
-
+ER図は[こちら](https://drive.google.com/file/d/1B2fnd8j50P8W__zK-6E4AgGaPnUzcHa8/view?usp=sharing)
 
 ## 開発環境
 - OS：Linux(CentOS)
