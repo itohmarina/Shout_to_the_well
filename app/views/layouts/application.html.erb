@@ -6,11 +6,47 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand p-1" href="/"><%= image_tag('Shout_to_the_well.png' ,size:"80x80" ) %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-outline-dark" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-outline-dark", method: :post %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "新規登録", new_user_registration_path, class:"btn btn-outline-dark" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン", new_user_session_path, class:"btn btn-outline-dark" %>
+              </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="mb-auto">
     <%= yield %>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">@</p>
+      </div>
+    </footer>
   </body>
 </html>

@@ -1,0 +1,38 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+      <%= render 'users/info', user:@user %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+  		<h2>Book detail</h2>
+  		<table class='table'>
+  		  <tr>
+          <td><%= @story.title %></td>
+          <td><%= @story.body %></td>
+          <td id="favorite_buttons_<%= @story.id %>">
+            <%#= render "favorites/favorite", story: @story %>
+          </td>
+            <% if @story.user==current_user %>
+              <td><%= link_to 'Edit', edit_public_story_path(@story), class: "btn btn-sm btn-success" %></td>
+              <td><%= link_to 'Destroy', public_story_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+            <% end %>
+          <td>コメント数:<%#= @book.book_comments.count %></td>
+        </tr>
+      </table>
+      <div id="">
+        <%#= render "book_comments/comment", book_comments: @book_comments, book: @book %>
+      </div>
+      <div>
+        <%#= form_with model:[@book,@book_comment],local:true, method: :post, data:{remote: true} do |f| %>
+          <%#= f.text_area :comment, rows:'5',placeholder:"コメントをここに", id:"text" %>
+          <%#= f.submit "送信" %>
+        <%# end %>
+      </div>
+    </div>
+  </div>
+</div>

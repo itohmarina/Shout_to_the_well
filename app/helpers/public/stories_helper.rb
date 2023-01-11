@@ -1,0 +1,2 @@
+module Public::StoriesHelper
+end
