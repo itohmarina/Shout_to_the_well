@@ -1,4 +1,5 @@
 class Public::StoriesController < ApplicationController
+  
   def show
     @story=Story.find(params[:id])
     @user=User.find(@story.user_id)

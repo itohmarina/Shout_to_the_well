@@ -6,6 +6,11 @@ class Public::UsersController < ApplicationController
     @user=current_user
     @stories=@user.stories
   end
+  
+  def story_index
+    @user=User.find(params[:id])
+    @stories=@user.stories
+  end 
 
 
   private

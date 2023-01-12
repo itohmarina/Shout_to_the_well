@@ -1,0 +1,28 @@
+<h2>User名のStoryなど一覧</h2>
+
+<table class="table table-hover table-inverse">
+  <!--検索対象モデルがUserの時 -->
+  <% if @range == "User" %>
+    <tbody>
+      <% if @users.present? %>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% else %>
+    <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
+    <tbody>
+      <% if @stories.present? %>
+        <% @stories.each do |story| %>
+          <tr>
+            <td><%= story.title %></td>
+            <td><%= story.body %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
