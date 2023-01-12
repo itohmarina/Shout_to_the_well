@@ -1,4 +1,4 @@
-class PublicMessagesController < ApplicationController
+class Public::PublicMessagesController < ApplicationController
 
   def index
     @public_messages = PublicMessage.all

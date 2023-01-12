@@ -23,16 +23,16 @@ Rails.application.routes.draw do
   }
 
 
-  root to:"homes#top"
-  get 'about' => 'homes#about'
-  get "search" => "searches#search"
-  resources :public_messages, only:[:index, :create, :destroy]
 
   namespace :public do
     resources :stories
   end
 
   scope module: :public do
+    root to:"homes#top"
+    get 'about' => 'homes#about'
+    get "search" => "searches#search"
+    resources :public_messages, only:[:index, :create, :destroy]
 
     get 'users/my_page' => 'users#show'
     get 'users/information/edit' => 'users#edit'
