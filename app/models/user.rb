@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_one_attached :user_image
   
   has_many :stories, dependent: :destroy
+  has_many :public_messages, dependent: :destroy
 
   def self.guest
     find_or_create_by!(name: 'guestuser' , email: 'guest@example.com') do |user|

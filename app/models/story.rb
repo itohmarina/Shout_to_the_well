@@ -3,6 +3,7 @@ class Story < ApplicationRecord
   # has_one_attached :story_image
   
   belongs_to :user
+  belongs_to :genres
   
   # 検索方法分岐
   def self.looks(search, word)

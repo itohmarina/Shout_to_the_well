@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'public_messages/index'
   get 'searches/show'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
   root to:"homes#top"
   get 'about' => 'homes#about'
   get "search" => "searches#search"
+  resources :public_messages, only:[:index, :create, :destroy]
 
   namespace :public do
     resources :stories

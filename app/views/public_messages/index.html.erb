@@ -1,0 +1,19 @@
+<h2>ここは公開チャットコーナーです</h2>
+<h6>公序良俗に違反するような内容があった場合、予告なく管理者がメッセージを削除したり、違反したユーザーを退会させる場合があります。</h6>
+
+<% if @public_messages.present? %>
+  <% @public_messages.each do |public_message| %>
+    <div>
+      <%= public_message.created_at.strftime('%Y/%m/%d') %><br>
+      <%= public_message.user.name %>:<%= public_message.body %>
+      <%= link_to 'Destroy', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+    </div>
+  <% end %>
+<% end %>
+
+<div>
+  <%= form_with model: PublicMessage, url: public_messages_path, method: :post do |f| %>
+    <%= f.text_area :body, placeholder:"メッセージを入れてください", cols:"50", rows:"2" %>
+    <%= f.submit "投稿",class:"btn btn-primary" %>
+  <% end %>
+</div>
