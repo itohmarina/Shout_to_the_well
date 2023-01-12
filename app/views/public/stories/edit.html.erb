@@ -1,2 +1,31 @@
-<h1>Public::Stories#edit</h1>
-<p>Find me in app/views/public/stories/edit.html.erb</p>
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+      <%= render 'public/users/info', user: @user %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+  		<h2>Edit Story</h2>
+  		<%= form_with model: @story, url: public_story_path, method: :patch do |f| %>
+  		  <%= f.text_area :title, placeholder:"タイトルを入れてください", cols:"50", rows:"1" %><br>
+  		  <%= f.text_area :body, placeholder:"本文を入れてください", cols:"50", rows:"10" %><br>
+
+  		  <%= f.label :is_private, '公開', value: false %>
+  		  <%= f.radio_button :is_private, false %>
+  		  <%= f.label :is_private, '非公開', value: true %>
+  		  <%= f.radio_button :is_private, true %><br>
+
+  		  <% @genres.each do |genre| %>
+  		    <%= f.radio_button :genre_id, genre.id %>
+  		    <%= f.label :genre_id, value: genre.name %><br>
+  		  <% end %>
+
+  		  <%= f.submit "投稿",class:"btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

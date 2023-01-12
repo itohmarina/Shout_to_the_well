@@ -1,0 +1,33 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+      <%= render 'public/users/info', user:@user %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+  		<h2>Users Stories</h2>
+  		<table class='table'>
+  		  <tr>
+  		    <% if @stories.present? %>
+    		    <%= @stories.each do |story| %>
+            <td><%= link_to story.title, public_story_path(story.id) %></td>
+            <td id="favorite_buttons_<%#= @book.id %>">
+              <%#= render "favorites/favorite", book: @book %>
+            </td>
+              <% if story.user==current_user %>
+                <td><%= link_to 'Edit', edit_public_story_path(story.id), class: "btn btn-sm btn-success" %></td>
+                <td><%= link_to 'Destroy', public_stor_path(story.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+              <% end %>
+            <td>コメント数:<%#= @book.book_comments.count %></td>
+            <td>閲覧数:<%#= @book.view_counts.count %></td>
+            <% end %>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
