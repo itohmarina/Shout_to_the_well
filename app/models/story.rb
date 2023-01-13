@@ -3,7 +3,12 @@ class Story < ApplicationRecord
   # has_one_attached :story_image
 
   belongs_to :user
-  belongs_to :genres
+  belongs_to :genre
+  has_many :favorites, dependent: :destroy
+
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
 
   # 検索方法分岐
   def self.looks(search, word)

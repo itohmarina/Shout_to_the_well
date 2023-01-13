@@ -21,10 +21,6 @@ Rails.application.routes.draw do
 
 
 
-  namespace :public do
-    resources :stories
-  end
-
   scope module: :public do
     root to:"homes#top"
     get 'about' => 'homes#about'
@@ -39,6 +35,13 @@ Rails.application.routes.draw do
     patch 'users/withdraw' => 'users#withdrawal'
 
   end
+
+
+  namespace :public do
+    resources :stories
+    resources :favorites, only:[:create, :destroy]
+  end
+
 
   scope module: :admin do
     get 'admin' => 'homes#top'

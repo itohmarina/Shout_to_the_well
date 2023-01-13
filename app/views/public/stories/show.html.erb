@@ -8,6 +8,9 @@
       <h2>User info</h2>
       <%= render 'public/users/info', user:@user %>
     </div>
+    <div>
+      <%= link_to "ユーザーページ", my_page_path(@user.id) %>
+    </div>
     <div class='col-md-8 offset-md-1'>
   		<h2>Book detail</h2>
   		<table class='table'>
@@ -15,7 +18,7 @@
           <td><%= @story.title %></td>
           <td><%= @story.body %></td>
           <td id="favorite_buttons_<%= @story.id %>">
-            <%#= render "favorites/favorite", story: @story %>
+            <%= render "public/favorites/favorite", story: @story %>
           </td>
             <% if @story.user==current_user %>
               <td><%= link_to 'Edit', edit_public_story_path(@story), class: "btn btn-sm btn-success" %></td>

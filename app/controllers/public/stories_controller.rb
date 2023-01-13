@@ -1,5 +1,5 @@
 class Public::StoriesController < ApplicationController
-  
+
   def show
     @story=Story.find(params[:id])
     @user=User.find(@story.user_id)
@@ -14,9 +14,11 @@ class Public::StoriesController < ApplicationController
   def create
     @story=Story.new(story_params)
     @story.user_id = current_user.id
-    if @story.save
+    @user=current_user
+    if @story.save!
       redirect_to public_story_path(@story.id), notice: "ストーリーを投稿しました"
     else
+      @genres=Genre.all
       render 'public/stories/new'
     end
   end

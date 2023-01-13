@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   has_many :stories, dependent: :destroy
   has_many :public_messages, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   def self.guest
     find_or_create_by!(name: 'guestuser' , email: 'guest@example.com') do |user|
