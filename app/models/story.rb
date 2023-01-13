@@ -1,10 +1,10 @@
 class Story < ApplicationRecord
-  
+
   # has_one_attached :story_image
-  
+
   belongs_to :user
   belongs_to :genres
-  
+
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
@@ -19,5 +19,10 @@ class Story < ApplicationRecord
       @story = Story.all
     end
   end
-  
+
+  #今日の投稿数検索
+  scope :created_today, -> { where(created_at: Time.zone.now.all_day) }
+  #過去の投稿数検索、n日前の投稿数
+  scope :created_days_ago, -> (n){ where(created_at: n.days.ago.all_day) }
+
 end

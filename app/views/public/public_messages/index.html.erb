@@ -6,7 +6,11 @@
     <div>
       <%= public_message.created_at.strftime('%Y/%m/%d') %><br>
       <%= public_message.user.name %>:<%= public_message.body %>
-      <%= link_to 'Destroy', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+
+      <% if current_user == public_message.user || admin_signed_in? %>
+        <%= link_to 'Destroy', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+      <% end %>
+
     </div>
   <% end %>
 <% end %>

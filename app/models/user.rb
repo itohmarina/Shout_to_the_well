@@ -4,8 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :email, uniqueness: true
+  validates :name, uniqueness: true
+
   has_one_attached :user_image
-  
+
   has_many :stories, dependent: :destroy
   has_many :public_messages, dependent: :destroy
 
@@ -15,7 +18,7 @@ class User < ApplicationRecord
       user.name = "guestuser"
     end
   end
-  
+
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
@@ -30,6 +33,6 @@ class User < ApplicationRecord
       @user = User.all
     end
   end
-  
+
 
 end

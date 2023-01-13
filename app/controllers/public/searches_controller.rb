@@ -1,5 +1,4 @@
 class Public::SearchesController < ApplicationController
-  before_action :authenticate_user!
 
   #検索結果を表示
   def search

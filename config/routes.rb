@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'public_messages/index'
-  get 'searches/show'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   #顧客用
@@ -17,8 +15,7 @@ Rails.application.routes.draw do
 
   #管理者用
   # URL /admin/sign_in ...
-  devise_for :admins,skip:[:registrations, :passwords] ,controllers:{
-    registrations:"admin/registrations",
+  devise_for :admin,skip:[:registrations, :passwords] ,controllers:{
     sessions:'admin/sessions'
   }
 
@@ -34,13 +31,22 @@ Rails.application.routes.draw do
     get "search" => "searches#search"
     resources :public_messages, only:[:index, :create, :destroy]
 
-    get 'users/my_page' => 'users#show'
+    get 'users/my_page/:id' => 'users#show', as: "my_page"
+    get 'users/my_page/:id/index' => 'users#index', as: "my_page_index"
     get 'users/information/edit' => 'users#edit'
     patch 'users/information' => 'users#update'
-    get 'users/unsubscribe' => 'users#unsubscribe'
+    get 'users/unsubscribe' => 'users#unsubscribe', as: "users_unsubscribe"
     patch 'users/withdraw' => 'users#withdrawal'
-    get 'users/story_index' => 'users#story_index'
 
+  end
+
+  scope module: :admin do
+    get 'admin' => 'homes#top'
+  end
+
+  namespace :admin do
+    resources :genres, only:[:index, :create, :update]
+    resources :users, only:[:show, :index, :update]
   end
 
 

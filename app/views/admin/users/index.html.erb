@@ -1,0 +1,22 @@
+<h2>ユーザー一覧</h2>
+
+<% if @users.present? %>
+  <% @users.each do |user| %>
+    <div>
+      <%= link_to "#{user.name}", admin_user_path(user.id) %>
+      <% if user.is_deleted == false %>
+        有効
+      <% else %>
+        退会
+      <% end %>
+      <% if admin_signed_in? %>
+        <% if user.is_deleted == false %>
+          <%= link_to '退会させる', admin_user_path(user.id), method: :patch, data: { confirm: '本当に退会させますか？' }, class: "btn btn-sm btn-danger"%>
+        <% else %>
+          <%= link_to '有効化する', admin_user_path(user.id), method: :patch, data: { confirm: 'ユーザーを有効化しますか？' }, class: "btn btn-sm btn-success"%>
+        <% end %>
+      <% end %>
+
+    </div>
+  <% end %>
+<% end %>

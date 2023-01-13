@@ -1,0 +1,27 @@
+admin homes#top
+<div>
+<% if admin_signed_in? %>
+  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+<% end %>
+<%= link_to "公開チャットルーム", public_messages_path %>
+<%= link_to "ストーリージャンル一覧", admin_genres_path %>
+<%= link_to "ユーザー一覧", admin_users_path %>
+</div>
+
+      <h2>7日分の投稿数</h2>
+      <table border="1" cellspacing="0">
+        <tr>
+          <% for num in 1..6 do %>
+            <% i=7-num %>
+            <th scope="col" width="50"><%= i.to_s+"日前" %></th>
+          <% end %>
+          <th scope="col" width="50">今日</th>
+        </tr>
+        <tr>
+          <% for num in 1..6 do %>
+            <% i=7-num %>
+            <td><%= Story.created_days_ago(i).count %></td>
+          <% end %>
+          <td><%= Story.created_today.count %></td>
+        </tr>
+      </table>

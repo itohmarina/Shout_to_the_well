@@ -1,0 +1,19 @@
+<h2>ジャンル一覧</h2>
+<% if @genres.present? %>
+  <% @genres.each do |genre| %>
+    <div>
+      <%= genre.name %>
+      <% if genre.is_deleted == false %>
+        <%= link_to "無効にする", admingenre_path(genre.id), method: :patch %>
+      <% else %>
+        <%= link_to "有効にする", admin_genre_path(genre.id), method: :patch %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= form_with model: Genre.new, url: admin_genres_path, method: :post do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit "ジャンルを作成する" %>
+<% end %>

@@ -7,8 +7,12 @@
     <div class='col-md-3'>
       <h2>User info</h2>
       <%= render 'public/users/info', user:@user %><br>
-      <%= link_to users_information_edit_path do %>
-        <i class="fas fa-user-cog"></i>
+      <% if admin_signed_in? %>
+        <% if @user.is_deleted == false %>
+          <%= link_to '退会させる', admin_user_path(@user.id), method: :patch, data: { confirm: '本当に退会させますか？' }, class: "btn btn-sm btn-danger"%>
+        <% else %>
+          <%= link_to '有効にする', admin_user_path(@user.id), method: :patch, data: { confirm: 'ユーザーを有効化しますか？' }, class: "btn btn-sm btn-success"%>
+        <% end %>
       <% end %>
       <%= link_to "ストーリー一覧", my_page_index_path(@user.id) %>
     </div>
@@ -22,10 +26,7 @@
             <td id="favorite_buttons_<%#= @book.id %>">
               <%#= render "favorites/favorite", book: @book %>
             </td>
-              <% if story.user==current_user %>
-                <td><%= link_to 'Edit', edit_public_story_path(story.id), class: "btn btn-sm btn-success" %></td>
-                <td><%= link_to 'Destroy', public_stor_path(story.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-              <% end %>
+
             <td>コメント数:<%#= @book.book_comments.count %></td>
             <td>閲覧数:<%#= @book.view_counts.count %></td>
             <% end %>

@@ -1,4 +1,4 @@
-<h2><%= "#{@user.name}さんのストーリー一覧"</h2>
+<h2><%= "#{@user.name}さんのストーリー一覧" %></h2>
 
 <table class="table table-hover table-inverse">
     <tbody>
@@ -12,3 +12,4 @@
       <% end %>
     </tbody>
 </table>
+<%= link_to "ユーザーページへ戻る", my_page_path(@user.id) %>
