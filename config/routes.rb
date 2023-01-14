@@ -39,7 +39,8 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :stories
-    resources :favorites, only:[:create, :destroy]
+    resources :favorites, only:[:create, :destroy, :show]
+    resources :story_comments, only:[:create, :destroy]
   end
 
 
@@ -50,6 +51,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :genres, only:[:index, :create, :update]
     resources :users, only:[:show, :index, :update]
+    resources :comments, only:[:index, :create, :update]
   end
 
 

@@ -14,6 +14,9 @@
       <div>
         <%= link_to "ストーリーを投稿する", new_public_story_path %>
       </div>
+      <div>
+        <%= link_to "お気に入りのストーリー一覧", public_favorite_path(@user.id) %>
+      </div>
     </div>
     <div class='col-md-8 offset-md-1'>
   		<h2>Users Stories</h2>

@@ -12,6 +12,15 @@ class User < ApplicationRecord
   has_many :stories, dependent: :destroy
   has_many :public_messages, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorite_stories, through: :favorites, source: :story
+
+
+  def get_user_image
+    (user_image.attached?) ? user_image : 'no_image.jpg'
+  end
+  
+  
+
 
   def self.guest
     find_or_create_by!(name: 'guestuser' , email: 'guest@example.com') do |user|
