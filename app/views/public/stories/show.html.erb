@@ -24,17 +24,36 @@
               <td><%= link_to 'Edit', edit_public_story_path(@story), class: "btn btn-sm btn-success" %></td>
               <td><%= link_to 'Destroy', public_story_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
             <% end %>
-          <td>コメント数:<%#= @book.book_comments.count %></td>
+          <td>コメント数:<%= @story_comments.count %></td>
         </tr>
       </table>
       <div id="">
         <%#= render "book_comments/comment", book_comments: @book_comments, book: @book %>
+        <% if @story_comments.present? %>
+          <% @story_comments.each do |story_comment| %>
+            <div>
+              <%#= image_tag story_comment.user.get_user_image, size:"30x30" %>
+              <%= story_comment.comment.body %>
+              <% if story_comment.user==current_user %>
+                <%= link_to "コメント削除", public_story_story_comment_path(@story.id, story_comment.id), method: :delete %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
       </div>
       <div>
-        <%#= form_with model:[@book,@book_comment],local:true, method: :post, data:{remote: true} do |f| %>
-          <%#= f.text_area :comment, rows:'5',placeholder:"コメントをここに", id:"text" %>
-          <%#= f.submit "送信" %>
-        <%# end %>
+        <h6>送りたいコメントを選んでください</h6>
+        <%= form_with model:[:public, @story, @story_comment], local:true, method: :post do |f| %>
+        <%#= form_with model:[:public, @story, StoryComment], public_story_story_comments_path, local:true, method: :post, data:{remote: true} do |f| %>
+          <%#= f.hidden_field :story_id, value: @story.id %>
+          <% @comments.each do |comment| %>
+            <div>
+            <%= f.radio_button :comment_id, comment.id %>
+            <%= f.label :comment_id, comment.body %>
+            </div>
+          <% end %>
+          <%= f.submit "送信", class:"btn btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>

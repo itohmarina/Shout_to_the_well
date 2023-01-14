@@ -8,3 +8,4 @@ homes#top
 <% if user_signed_in? %>
   <%= link_to "マイページ", my_page_path(current_user.id) %>
 <% end %>
+<%= link_to "グループを作成する", public_groups_path, method: :post %

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'groups/index'
+  get 'groups/show'
+  get 'groups/new'
+  get 'group_users/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   #顧客用
@@ -38,9 +42,13 @@ Rails.application.routes.draw do
 
 
   namespace :public do
-    resources :stories
+    resources :stories do
+      resources :story_comments, only:[:create, :destroy]
+    end
     resources :favorites, only:[:create, :destroy, :show]
-    resources :story_comments, only:[:create, :destroy]
+    resources :group_users, only:[:index, :create, :destroy]
+    resources :groups, only:[:show, :index, :new, :create, :update]
+    patch 'groups/close' => 'groups#close'
   end
 
 

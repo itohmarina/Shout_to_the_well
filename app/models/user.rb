@@ -10,16 +10,23 @@ class User < ApplicationRecord
   has_one_attached :user_image
 
   has_many :stories, dependent: :destroy
+  has_many :story_comments, dependent: :destroy
   has_many :public_messages, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_stories, through: :favorites, source: :story
+
+  has_many :group_users, dependent: :destroy
+  has_many :groups, through: :group_users, source: :group
 
 
   def get_user_image
     (user_image.attached?) ? user_image : 'no_image.jpg'
   end
-  
-  
+
+  # has_one_attached :user_icon do |attachable|
+  #   attachable.variant :icon, resize_to_limit: [30, 30]
+  # end
+  #<%= image_tag story_comment.avatar.variant(:icon) %>をviewに貼り付ける
 
 
   def self.guest

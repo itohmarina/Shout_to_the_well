@@ -3,6 +3,9 @@ class Public::StoriesController < ApplicationController
   def show
     @story=Story.find(params[:id])
     @user=User.find(@story.user_id)
+    @story_comments=@story.story_comments
+    @comments=Comment.all
+    @story_comment=StoryComment.new
   end
 
   def new
