@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'groups/index'
-  get 'groups/show'
-  get 'groups/new'
-  get 'group_users/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   #顧客用
@@ -31,24 +27,34 @@ Rails.application.routes.draw do
     get "search" => "searches#search"
     resources :public_messages, only:[:index, :create, :destroy]
 
-    get 'users/my_page/:id' => 'users#show', as: "my_page"
-    get 'users/my_page/:id/index' => 'users#index', as: "my_page_index"
-    get 'users/information/edit' => 'users#edit'
-    patch 'users/information' => 'users#update'
-    get 'users/unsubscribe' => 'users#unsubscribe', as: "users_unsubscribe"
-    patch 'users/withdraw' => 'users#withdrawal'
+    # get 'users/index'
+    # get 'users/my_page/:id' => 'users#show', as: "my_page"
+    # get 'users/my_page/:id/story_index' => 'users#story_index', as: "my_page_index"
+    # get 'users/information/edit' => 'users#edit'
+    # patch 'users/information' => 'users#update'
+    # get 'users/unsubscribe' => 'users#unsubscribe', as: "users_unsubscribe"
+    # patch 'users/withdraw' => 'users#withdrawal'
 
   end
 
 
   namespace :public do
+    resources :users, only:[:show, :index, :edit, :update]
+    get 'users/:id/story_index' => 'users#story_index'
+    get 'users/unsubscribe' => 'users#unsubscribe'
+    patch 'users/withdraw' => 'users#withdrawal'
+
     resources :stories do
       resources :story_comments, only:[:create, :destroy]
     end
     resources :favorites, only:[:create, :destroy, :show]
     resources :group_users, only:[:index, :create, :destroy]
-    resources :groups, only:[:show, :index, :new, :create, :update]
+    patch 'group_users/accept' => 'group#accept'
+    resources :groups, only:[:show, :index, :new, :create, :update, :edit]
     patch 'groups/close' => 'groups#close'
+    resources :relationships, only:[:create, :destroy]
+    get 'relationships/followings' => 'relationships#followings'
+    get 'relationships/followers' => 'relationships#followers'
   end
 
 

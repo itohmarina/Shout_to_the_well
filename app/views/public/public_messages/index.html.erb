@@ -16,7 +16,7 @@
 <% end %>
 
 <div>
-  <%= form_with model: PublicMessage, url: public_messages_path, method: :post do |f| %>
+  <%= form_with model: @public_message, url: public_messages_path, method: :post do |f| %>
     <%= f.text_area :body, placeholder:"メッセージを入れてください", cols:"50", rows:"2" %>
     <%= f.submit "投稿",class:"btn btn-primary" %>
   <% end %>

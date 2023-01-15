@@ -9,6 +9,14 @@ class User < ApplicationRecord
 
   has_one_attached :user_image
 
+  #フォロワーを参照する
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followers, through: :relationships, source: :follower
+  #フォロー先を参照する
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followings, through: :reverse_of_relationships, source: :followed
+
+
   has_many :stories, dependent: :destroy
   has_many :story_comments, dependent: :destroy
   has_many :public_messages, dependent: :destroy
@@ -28,6 +36,17 @@ class User < ApplicationRecord
   # end
   #<%= image_tag story_comment.avatar.variant(:icon) %>をviewに貼り付ける
 
+  # def follow(user_id)
+  #   relationships.create(followed_id: user_id)
+  # end
+
+  # def unfollow(user_id)
+  #   relationships.find_by(followed_id: user_id).destroy
+  # end
+
+  def following?(other_user)
+    followings.include?(other_user)
+  end
 
   def self.guest
     find_or_create_by!(name: 'guestuser' , email: 'guest@example.com') do |user|

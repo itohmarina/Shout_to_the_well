@@ -7,6 +7,10 @@ class Public::UsersController < ApplicationController
   end
 
   def index
+    @users=User.all
+  end
+
+  def story_index
     @user=User.find(params[:id])
     @stories=@user.stories
   end
@@ -19,7 +23,7 @@ class Public::UsersController < ApplicationController
     @user=current_user
 
     if @user.update(user_params)
-      redirect_to my_page_path(current_user.id), notice: "ユーザー情報を更新しました"
+      redirect_to public_user_path(current_user.id), notice: "ユーザー情報を更新しました"
     else
       render 'public/users/edit'
     end

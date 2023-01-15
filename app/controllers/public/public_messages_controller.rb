@@ -2,6 +2,7 @@ class Public::PublicMessagesController < ApplicationController
 
   def index
     @public_messages = PublicMessage.all
+    @public_message = PublicMessage.new
   end
 
   def create

@@ -1,0 +1,8 @@
+<h2>フォロワー一覧</h2>
+
+<% @users.each do |user| %>
+  <div>
+    <%= image_tag user.get_user_image %>
+    <%= link_to "#{user.name}", my_page_path %>
+  </div>
+<% end %>

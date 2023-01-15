@@ -1,0 +1,26 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+      <%= render 'public/users/info', user: @user %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+  		<h2>New Group</h2>
+  		<%= form_with model: @group, url: public_groups_path, method: :post do |f| %>
+  		  <%= f.text_area :name, placeholder:"グループ名を入れてください", cols:"50", rows:"1" %><br>
+  		  <%= f.text_area :introduction, placeholder:"グループ紹介を入れてください", cols:"50", rows:"2" %><br>
+
+  		  <%= f.submit "グループを作成する",class:"btn btn-primary" %>
+      <% end %>
+    </div>
+    <div>
+      使用方法
+      グループを作成すると、ほかのユーザーをグループに招待することができるようになります。
+      相手が招待を受諾すると、グループ内で会話することができるようになります。
+    </div>
+  </div>
+</div>

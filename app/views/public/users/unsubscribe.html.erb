@@ -1,3 +1,3 @@
 <h5>本当に退会しますか？</h5>
-<%= link_to "退会する", users_withdraw_path, method: :patch %>
-<%= link_to "マイページに戻る", my_page_path(current_user.id) %>
+<%= link_to "退会する", public_users_withdraw_path, method: :patch %>
+<%= link_to "マイページに戻る", public_user_path(current_user.id) %>

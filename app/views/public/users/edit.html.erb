@@ -5,7 +5,7 @@
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
     <h2>User info</h2>
-    <%= form_with model:@user, url: users_information_path(@user.id),local:true, method: :patch do |f| %>
+    <%= form_with model:@user, url: public_user_path(@user.id),local:true, method: :patch do |f| %>
       <%= render 'layouts/errors', obj: @user %>
       <div class="form-group">
         <%= f.label :name %>
@@ -25,6 +25,6 @@
     <% end %>
   </div>
   <div>
-    <%= link_to "退会", users_unsubscribe_path, class: "bun btn-danger" %>
+    <%= link_to "退会", public_users_unsubscribe_path, class: "bun btn-danger" %>
   </div>
 </div>

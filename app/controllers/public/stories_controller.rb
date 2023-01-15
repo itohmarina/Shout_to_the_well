@@ -15,26 +15,26 @@ class Public::StoriesController < ApplicationController
   end
 
   def create
-    @story=Story.new(story_params)
+    @story = Story.new(story_params)
     @story.user_id = current_user.id
-    @user=current_user
+    @user = current_user
     if @story.save!
       redirect_to public_story_path(@story.id), notice: "ストーリーを投稿しました"
     else
-      @genres=Genre.all
+      @genres = Genre.all
       render 'public/stories/new'
     end
   end
 
   def edit
-    @story=Story.find(params[:id])
-    @user=current_user
-    @genres=Genre.all
+    @story = Story.find(params[:id])
+    @user = current_user
+    @genres = Genre.all
     is_matching_login_user
   end
 
   def update
-    @story=Story.find(params[:id])
+    @story = Story.find(params[:id])
     is_matching_login_user
 
     if @story.update(story_params)
@@ -45,14 +45,14 @@ class Public::StoriesController < ApplicationController
   end
 
   def destroy
-    @story=Story.find(params[:id])
+    @story = Story.find(params[:id])
     is_matching_login_user
 
     if @story.destroy
-      flash[:notice]="ストーリーが削除されました"
+      flash[:notice]="ストーリーを削除しました"
       redirect_to users_my_page_path
     else
-      @user=current_user
+      @user = current_user
       render "public/users/show"
     end
   end

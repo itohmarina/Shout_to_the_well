@@ -1,0 +1,9 @@
+<h2>グループ一覧</h2>
+
+<% @groups.each do |group| %>
+  <div>
+    <%= image_tag group.get_group_image %>
+    <%= link_to "#{group.name}", public_group_path %><br>
+    <%= group.introduction %>
+  </div>
+<% end %>
