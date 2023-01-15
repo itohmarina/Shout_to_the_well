@@ -1,12 +1,19 @@
 class Public::GroupUsersController < ApplicationController
 
-  def index
-    @groups = Group.where(user_id: current_user.id)
+  def new
+    @users = current_user.followings
+    @group_user = GroupUser.new
   end
 
   def create
-    @group_user = GroupUser.new(group_id: params[:group_user][:group_id])
-    @group_user.user_id=current_user.id
+    current_user.invite_group(params[:group_id])
+    redirect_to request.referer
+  end
+
+  def destroy
+    current_user.leave_group(params[:group_id])
+    flash[:notice] = "グループを退会しました"
+    redirect_to public_user_path(current_user.id)
   end
 
   #グループ参加リクエストを受け付ける
@@ -17,18 +24,9 @@ class Public::GroupUsersController < ApplicationController
       flash[:notice] = "グループに参加しました"
       redirect_to public_group_path(@group_user.group.id)
     else
-      render "public/users/show"
+      redirect_to request.referer
     end
   end
 
-  def destroy
-    @group_user = GroupUser.find(params[:id])
-    if @group_user.destroy
-      flash[:notice] = "グループを退会しました"
-      redirect_to my_page_path
-    else
-      render "public/groups/show"
-    end
-  end
 
 end

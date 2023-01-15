@@ -43,6 +43,11 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def group_index
+    @user = User.find(params[:id])
+    @group_users = GroupUser.where(user_id: @user.id)
+  end
+
 
   private
 

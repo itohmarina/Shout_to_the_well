@@ -1,10 +1,10 @@
 <h2>参加しているグループ一覧</h2>
 <div>
-  <%= link_to "グループを作成する", public_groups_path, method: :post %>
+  <%= link_to "グループを作成する", new_public_group_path %>
 </div>
 
-<% if @groups.present? %>
-  <% @groups.each do |group| %>
+<% if @group_users.present? %>
+  <% @group_users.each do |group| %>
     <div>
       <%= image_tag group.get_group_image %>
       <%= group.name %><br>

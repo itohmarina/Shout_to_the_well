@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     get 'users/:id/story_index' => 'users#story_index'
     get 'users/unsubscribe' => 'users#unsubscribe'
     patch 'users/withdraw' => 'users#withdrawal'
+    get 'users/:id/group_index' => 'users#group_index', as: "users_group_index"
 
     resources :users do
       resource :relationships, only:[:create, :destroy]
@@ -46,12 +47,17 @@ Rails.application.routes.draw do
       resources :story_comments, only:[:create, :destroy]
     end
     resources :favorites, only:[:create, :destroy, :show]
-    resources :group_users, only:[:index, :create, :destroy]
-    patch 'group_users/accept' => 'group#accept'
+
     resources :groups, only:[:show, :index, :new, :create, :update, :edit]
     patch 'groups/close' => 'groups#close'
+    resources :groups do
+      resource :group_users, only:[:new, :create, :destroy]
+      patch 'group_users/accept' => 'group_users#accept'
+    end
 
   end
+
+
 
 
   scope module: :admin do

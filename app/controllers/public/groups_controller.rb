@@ -1,13 +1,24 @@
 class Public::GroupsController < ApplicationController
 
   def new
-    @group=@Group.new(group_params)
+    @user = current_user
+    @group = Group.new
+  end
+
+  def create
+    @group=Group.new(group_params)
     @group.owner_id = current_user.id
     if @group.save!
+      GroupUser.create!(group_id: @group.id, user_id: current_user.id)
       redirect_to public_group_path(@group.id)
     else
-      render root_path
+      render "public/groups/new"
     end
+  end
+
+  def show
+    @group = Group.find(params[:id])
+    @users = @group.users
   end
 
   def index
@@ -44,6 +55,6 @@ class Public::GroupsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:name, :introduction)
-  end 
+  end
 
 end

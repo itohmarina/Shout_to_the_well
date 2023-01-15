@@ -72,4 +72,16 @@ class User < ApplicationRecord
   end
 
 
+  def invite_group(group)
+    group_users.create!(group_id: group)
+  end
+
+  def leave_group(group)
+    group_users.find_by(group_id: group).destroy
+  end
+
+  def joining?(group)
+    group_users.include?(group)
+  end
+
 end

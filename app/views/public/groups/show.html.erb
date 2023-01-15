@@ -6,8 +6,8 @@
   <div class='row'>
     <div class='col-md-3'>
       <h2>Group info</h2>
-      <%= render 'public/groups/info', user:@group %><br>
-      <%= link_to public_group_edit_path do %>
+      <%= render 'public/groups/info', group: @group %><br>
+      <%= link_to edit_public_group_path do %>
         <i class="fas fa-user-cog"></i>
       <% end %>
       <div>

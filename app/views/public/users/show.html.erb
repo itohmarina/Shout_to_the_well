@@ -32,8 +32,10 @@
         <%= link_to "お気に入りのストーリー一覧", public_favorite_path(@user.id) %>
       </div>
       <div>
-        <%= link_to "参加しているグループ一覧", public_group_users_path %>
+        <%= link_to "参加しているグループ一覧", public_users_group_index_path(@user.id) %>
+        <%= link_to "新しいグループを作成する", new_public_group_path %>
       </div>
+    </div>
     </div>
     <div class='col-md-8 offset-md-1'>
   		<h2>Users Stories</h2>
