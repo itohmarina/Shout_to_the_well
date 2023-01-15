@@ -27,14 +27,6 @@ Rails.application.routes.draw do
     get "search" => "searches#search"
     resources :public_messages, only:[:index, :create, :destroy]
 
-    # get 'users/index'
-    # get 'users/my_page/:id' => 'users#show', as: "my_page"
-    # get 'users/my_page/:id/story_index' => 'users#story_index', as: "my_page_index"
-    # get 'users/information/edit' => 'users#edit'
-    # patch 'users/information' => 'users#update'
-    # get 'users/unsubscribe' => 'users#unsubscribe', as: "users_unsubscribe"
-    # patch 'users/withdraw' => 'users#withdrawal'
-
   end
 
 
@@ -44,6 +36,12 @@ Rails.application.routes.draw do
     get 'users/unsubscribe' => 'users#unsubscribe'
     patch 'users/withdraw' => 'users#withdrawal'
 
+    resources :users do
+      resource :relationships, only:[:create, :destroy]
+      get 'relationships/followings' => 'relationships#followings'
+      get 'relationships/followers' => 'relationships#followers'
+    end
+
     resources :stories do
       resources :story_comments, only:[:create, :destroy]
     end
@@ -52,9 +50,7 @@ Rails.application.routes.draw do
     patch 'group_users/accept' => 'group#accept'
     resources :groups, only:[:show, :index, :new, :create, :update, :edit]
     patch 'groups/close' => 'groups#close'
-    resources :relationships, only:[:create, :destroy]
-    get 'relationships/followings' => 'relationships#followings'
-    get 'relationships/followers' => 'relationships#followers'
+
   end
 
 

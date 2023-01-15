@@ -15,10 +15,14 @@
         <% end %>
       <div>
         <% if current_user.following?(@user) %>
-          <%= link_to "フォローを外す", public_relationships_path(@user.id), method: :delete, class: "btn btn-info" %>
+          <%= link_to "フォローを外す", public_user_relationships_path(@user.id), method: :delete, class: "btn btn-info" %>
         <% else %>
-          <%= link_to "フォローする", public_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
+          <%= link_to "フォローする", public_user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
         <% end %>
+      </div>
+      <div>
+        <%= link_to "フォロー一覧", public_user_relationships_followings_path(@user.id) %>
+        <%= link_to "フォロワー一覧", public_user_relationships_followers_path(@user.id) %>
       </div>
       <%= link_to "ストーリー一覧", public_path(@user.id) %>
       <div>

@@ -1,8 +1,10 @@
 <h2>フォロー中のユーザー一覧</h2>
 
-<% @users.each do |user| %>
-  <div>
-    <%= image_tag user.get_user_image %>
-    <%= link_to "#{user.name}", my_page_path %>
-  </div>
+<% if @users.present? %>
+  <% @users.each do |user| %>
+    <div>
+      <%= image_tag user.get_user_image, size:"100x100" %>
+      <%= link_to "#{user.name}", public_user_path(user.id) %>
+    </div>
+  <% end %>
 <% end %>

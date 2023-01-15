@@ -1,12 +1,11 @@
 <h2>Users Index</h2>
 <table class='table'>
-  <tr>
-    <% if @users.present? %>
-	    <% @users.each do |user| %>
-      <td><%= link_to user.name, public_users_path(user.id) %></td>
-      <td>コメント数:<%#= story.story_comments.count %></td>
-      <% end %>
+  <% if @users.present? %>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.name, public_user_path(user.id) %></td>
+    </tr>
     <% end %>
-  </tr>
+  <% end %>
 </table>
 <%= link_to "トップへ戻る", root_path %>
