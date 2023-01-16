@@ -2,11 +2,13 @@ class Public::GroupUsersController < ApplicationController
 
   def new
     @users = current_user.followings
+    @group = Group.find(params[:group_id])
     @group_user = GroupUser.new
   end
 
   def create
-    current_user.invite_group(params[:group_id])
+    user = User.find(params[:invited_id])
+    user.invite_group(params[:group_id])
     redirect_to request.referer
   end
 
@@ -18,9 +20,9 @@ class Public::GroupUsersController < ApplicationController
 
   #グループ参加リクエストを受け付ける
   def accept
-    @group_user = GroupUser.find(params[:id])
-    @group_user.request_is_accepted = true
-    if @group_user.update
+    @group_user = GroupUser.find_by(group_id: params[:group_id], user_id: current_user.id)
+
+    if @group_user.update(request_is_accepted: true)
       flash[:notice] = "グループに参加しました"
       redirect_to public_group_path(@group_user.group.id)
     else

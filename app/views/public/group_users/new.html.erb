@@ -1,12 +1,19 @@
 <h5>グループ<%= @group.name %>に招待するユーザーを選択してください</h5>
+<h6>あなたがフォローしているユーザーを招待できます。</h6>
 
 <% if @users.present? %>
   <% @users.each do |user| %>
-    <% if user.joining?(@group) %>
-      <h6>グループ参加中</h6>
-    <% else %>
-      <%= link_to "招待する", public_group_group_users_path(@group), method: :post do |f| %>
-    <% end %>
+    <%= image_tag user.get_user_image, size: "100x100" %>
+    <%= user.name %>
+      <% if user.requested?(@group) %>
+        <% if user.joining?(@group.id) %>
+          <h6>参加中です</h6>
+        <% else %>
+          <h6>招待中です</h6>
+        <% end %>
+      <% else %>
+        <%= link_to "招待する", public_group_group_users_path(@group.id, invited_id: user.id), method: :post %>
+      <% end %>
 
   <% end %>
 <% end %>

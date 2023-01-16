@@ -3,7 +3,7 @@
 <% @groups.each do |group| %>
   <div>
     <%= image_tag group.get_group_image %>
-    <%= link_to "#{group.name}", public_group_path %><br>
+    <%= link_to "#{group.name}", public_group_path(group.id) %><br>
     <%= group.introduction %>
   </div>
 <% end %>

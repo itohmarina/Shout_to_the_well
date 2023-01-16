@@ -53,7 +53,12 @@ Rails.application.routes.draw do
     resources :groups do
       resource :group_users, only:[:new, :create, :destroy]
       patch 'group_users/accept' => 'group_users#accept'
+      resources :group_messages, only:[:create, :destroy]
     end
+
+    resource :suggestions, only:[:new, :create]
+    get 'suggestions/confirm' => 'suggestions#confirm'
+    get 'suggestions/thanks' => 'suggestions#thanks'
 
   end
 

@@ -4,11 +4,11 @@
 </div>
 
 <% if @group_users.present? %>
-  <% @group_users.each do |group| %>
+  <% @group_users.each do |group_user| %>
     <div>
-      <%= image_tag group.get_group_image %>
-      <%= group.name %><br>
-      <%= group.introduction %>
+      <%= image_tag group_user.group.get_group_image %>
+      <%= link_to group_user.group.name, public_group_path(group_user.group_id)%><br>
+      <%= group_user.group.introduction %>
     </div>
   <% end %>
 <% else %>

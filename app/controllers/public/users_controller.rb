@@ -4,10 +4,11 @@ class Public::UsersController < ApplicationController
   def show
     @user=User.find(params[:id])
     @stories=@user.stories
+    @group_users = GroupUser.where(user_id: current_user, request_is_accepted: false)
   end
 
   def index
-    @users=User.all
+    @users=User.where(is_deleted: false)
   end
 
   def story_index

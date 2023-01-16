@@ -24,8 +24,9 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_stories, through: :favorites, source: :story
 
-  has_many :group_users, dependent: :destroy
+  has_many :group_users, foreign_key: "user_id", dependent: :destroy
   has_many :groups, through: :group_users, source: :group
+  has_many :group_messages, foreign_key: "user_id"
 
 
   def get_user_image
@@ -80,8 +81,12 @@ class User < ApplicationRecord
     group_users.find_by(group_id: group).destroy
   end
 
+  def requested?(group)
+    group_users.exists?(group_id: group.id)
+  end
+
   def joining?(group)
-    group_users.include?(group)
+    group_users.find_by(group_id: group).request_is_accepted
   end
 
 end

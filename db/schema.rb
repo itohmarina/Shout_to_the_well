@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_15_042813) do
+ActiveRecord::Schema.define(version: 2023_01_16_052958) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -87,6 +87,14 @@ ActiveRecord::Schema.define(version: 2023_01_15_042813) do
     t.index ["name"], name: "index_genres_on_name", unique: true
   end
 
+  create_table "group_messages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
+    t.string "body", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "group_users", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "group_id", null: false
@@ -133,6 +141,14 @@ ActiveRecord::Schema.define(version: 2023_01_15_042813) do
     t.integer "user_id", null: false
     t.integer "story_id", null: false
     t.integer "comment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "suggestions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "title", null: false
+    t.string "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -9,7 +9,7 @@ class Public::GroupsController < ApplicationController
     @group=Group.new(group_params)
     @group.owner_id = current_user.id
     if @group.save!
-      GroupUser.create!(group_id: @group.id, user_id: current_user.id)
+      GroupUser.create!(group_id: @group.id, user_id: current_user.id, request_is_accepted: true)
       redirect_to public_group_path(@group.id)
     else
       render "public/groups/new"
@@ -19,6 +19,8 @@ class Public::GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @users = @group.users
+    @group_messages = GroupMessage.where(group_id: @group.id)
+    @group_message = GroupMessage.new
   end
 
   def index
