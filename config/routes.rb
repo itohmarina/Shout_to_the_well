@@ -64,7 +64,6 @@ Rails.application.routes.draw do
 
 
 
-
   scope module: :admin do
     get 'admin' => 'homes#top'
   end
@@ -73,6 +72,7 @@ Rails.application.routes.draw do
     resources :genres, only:[:index, :create, :update]
     resources :users, only:[:show, :index, :update]
     resources :comments, only:[:index, :create, :update]
+    resources :suggestions, only:[:index, :show]
   end
 
 

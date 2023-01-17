@@ -1,0 +1,9 @@
+<h2>投書一覧</h2>
+<% @suggestions.each do |suggestion| %>
+  <div>
+    <%= suggestion.created_at.strftime('%Y/%m/%d') %><br>
+    <%= link_to suggestion.title, admin_suggestion_path(suggestion.id) %>
+  </div>
+<% end %>
+
+<%= link_to "管理者トップへ戻る", admin_path %>

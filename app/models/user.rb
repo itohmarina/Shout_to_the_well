@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :group_users, foreign_key: "user_id", dependent: :destroy
   has_many :groups, through: :group_users, source: :group
   has_many :group_messages, foreign_key: "user_id"
+  
+  has_many :suggestions
 
 
   def get_user_image

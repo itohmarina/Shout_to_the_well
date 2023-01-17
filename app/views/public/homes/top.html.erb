@@ -7,6 +7,7 @@ homes#top
 <%= link_to "公開チャットルーム", public_messages_path %>
 <% if user_signed_in? %>
   <%= link_to "マイページ", public_user_path(current_user.id) %>
+  <%= link_to "投書箱", new_public_suggestions_path %>
 <% end %>
 <%= link_to "グループを作成する", public_groups_path, method: :post %>
 <%= link_to "ユーザー一覧", public_users_path %>
