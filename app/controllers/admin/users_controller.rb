@@ -6,7 +6,6 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user=User.find(params[:id])
-    @stories=@user.stories
   end
 
   def update
@@ -19,5 +18,5 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_users_path
     end
   end
-  
+
 end

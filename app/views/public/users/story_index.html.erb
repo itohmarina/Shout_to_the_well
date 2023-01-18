@@ -6,7 +6,14 @@
         <% @stories.each do |story| %>
           <tr>
             <td><%= link_to story.title, public_story_path(story.id) %></td>
-            <td><%= story.body %></td>
+            <td id="favorite_buttons">
+              <%= render "public/favorites/favorite", story: story %>
+            </td>
+            <td>コメント数:<%= story.story_comments.count %></td>
+            <% if story.user==current_user %>
+              <td><%= link_to '編集', edit_public_story_path(story.id), class: "btn btn-sm btn-outline-success" %></td>
+              <td><%= link_to '削除', public_story_path(story.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%></td>
+            <% end %>
           </tr>
         <% end %>
       <% end %>

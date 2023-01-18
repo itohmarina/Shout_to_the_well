@@ -1,2 +1,39 @@
-<%= image_tag user.get_user_image, size:'100x100' %>
-<div><%= user.name %></div>
+<table class='table user-info'>
+  <tr>
+    <th colspan="2"><%= image_tag user.get_user_image, size:'100x100' %></th>
+  </tr>
+  <tr>
+    <th colspan="2"><%= user.name %></th>
+  </tr>
+  <tr>
+    <% if user.introduction.present? %>
+      <td colspan="2"><%= user.introduction %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <% if user == current_user %>
+        <%= link_to edit_public_user_path(current_user.id), class: "btn btn-outline-secondary btn-block" do %>
+          <i class="fas fa-user-cog"></i>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <% if user != current_user %>
+      <% if current_user.following?(@user) %>
+        <th colspan="2"><%= link_to "フォローを外す", public_user_relationships_path(@user.id), method: :delete, class: "btn btn-success" %></th>
+      <% else %>
+        <th colspan="2"><%= link_to "フォローする", public_user_relationships_path(@user.id), method: :post, class: "btn btn-outline-success" %></th>
+      <% end %>
+    <% end %>
+  </tr>
+  <tr>
+    <th>フォロー中</th>
+    <td><%= link_to "#{user.followings.count}人", public_user_relationships_followings_path(@user.id) %></td>
+  </tr>
+  <tr>
+    <th>フォロワー</th>
+    <td><%= link_to "#{user.followers.count}人", public_user_relationships_followers_path(@user.id) %></td>
+  </tr>
+</table>

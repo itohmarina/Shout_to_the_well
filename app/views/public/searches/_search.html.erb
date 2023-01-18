@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <div class="search_form">
+  <div class="search_form ml-auto">
     <%= form_with url: search_path, local: true, method: :get do |f| %>
       <%= f.text_field :word %>
       <%= f.select :range, options_for_select([['Story'],['User'],['Group']]) %>

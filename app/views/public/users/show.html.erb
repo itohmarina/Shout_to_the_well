@@ -4,70 +4,35 @@
 
 <div class='container'>
   <div class='row'>
-    <div class='col-md-3'>
-      <h2>User info</h2>
+    <div class='col-md-3 d-grid gap-2'>
       <%= render 'public/users/info', user:@user %><br>
-      <div>
-        <% if @user == current_user %>
-          <%= link_to edit_public_user_path(current_user.id) do %>
-            <i class="fas fa-user-cog"></i>
-          <% end %>
-        <% end %>
-      <div>
-        <% if @user != current_user %>
-          <% if current_user.following?(@user) %>
-            <%= link_to "フォローを外す", public_user_relationships_path(@user.id), method: :delete, class: "btn btn-info" %>
-          <% else %>
-            <%= link_to "フォローする", public_user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
-          <% end %>
-        <% end %>
-      </div>
-      <div>
-        <%= link_to "フォロー一覧", public_user_relationships_followings_path(@user.id) %>
-        <%= link_to "フォロワー一覧", public_user_relationships_followers_path(@user.id) %>
-      </div>
-      <%= link_to "ストーリー一覧", public_path(@user.id) %>
-      <div>
-        <%= link_to "ストーリーを投稿する", new_public_story_path %>
-      </div>
-      <div>
-        <%= link_to "お気に入りのストーリー一覧", public_favorite_path(@user.id) %>
-      </div>
+    </div>
+    <div class='col-md-8 offset-md-1 user_items'>
+      <%= link_to public_path(@user.id) do %>
+        <div><%= image_tag('books.jpg' ,size:"150x150" ) %></div>
+        <span>ストーリー一覧</span>
+      <% end %>
+      <%= link_to new_public_story_path do %>
+        <div><%= image_tag('manuscript.jpg' ,size:"150x150" ) %></div>
+        <span>ストーリーを投稿する</span>
+      <% end %>
+      <%= link_to public_favorite_path(@user.id) do %>
+        <div><%= image_tag('lily.jpg' ,size:"150x150" ) %></div>
+        <span>お気に入りのストーリー一覧</span>
+      <% end %>
       <div class="deeppink">
         <% if @group_users.present? %>
           <% @group_users.each do |group_user| %>
-            <%= group_user.group.name %>へ招待されています。
-            <%= link_to "参加する", public_group_group_users_accept_path(group_user.group_id), method: :patch, class: "btn btn-info" %>
+            <i class="far fa-envelope"></i><%= group_user.group.name %>へ招待されています。
+            <%= link_to "参加する", public_group_group_users_accept_path(group_user.group_id), method: :patch, class:"btn btn-outline-warning" %>
           <% end %>
         <% end %>
       </div>
-      <div>
-        <%= link_to "参加しているグループ一覧", public_users_group_index_path(@user.id) %>
-      </div>
-      <div>
-        <%= link_to "新しいグループを作成する", new_public_group_path %>
-      </div>
-    </div>
-    </div>
-    <div class='col-md-8 offset-md-1'>
-  		<h2>Users Stories</h2>
-  		<table class='table'>
-  		  <tr>
-  		    <% if @stories.present? %>
-    		    <% @stories.each do |story| %>
-            <td><%= link_to story.title, public_story_path(story.id) %></td>
-            <td id="favorite_buttons_<%#= @book.id %>">
-              <%= render "public/favorites/favorite", story: story %>
-            </td>
-              <% if story.user==current_user %>
-                <td><%= link_to 'Edit', edit_public_story_path(story.id), class: "btn btn-sm btn-success" %></td>
-                <td><%= link_to 'Destroy', public_story_path(story.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-              <% end %>
-            <td>コメント数:<%= story.story_comments.count %></td>
-            <% end %>
-          <% end %>
-        </tr>
-      </table>
+      <%= link_to public_users_group_index_path(@user.id) do %>
+        <div><%= image_tag('coffeecup.jpg' ,size:"150x150" ) %></div>
+        <span>参加しているグループ一覧</span>
+      <% end %>
     </div>
   </div>
+  
 </div>

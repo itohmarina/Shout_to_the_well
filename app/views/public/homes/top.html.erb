@@ -3,12 +3,33 @@
 </div>
 
 homes#top
-
-<%= link_to "公開チャットルーム", public_messages_path %>
-<% if user_signed_in? %>
-  <%= link_to "マイページ", public_user_path(current_user.id) %>
-  <%= link_to "投書箱", new_public_suggestions_path %>
-<% end %>
-<%= link_to "グループを作成する", public_groups_path, method: :post %>
-<%= link_to "ユーザー一覧", public_users_path %>
-<%= link_to "グループ一覧", public_groups_path %>
+<div class="container">
+  <div class="col-lg-12 top-items">
+      <%= link_to public_messages_path do %>
+        <div><%= image_tag('castle-1.jpg' ,size:"150x150" ) %></div>
+        <span>公開チャットルーム</span>
+      <% end %>
+      <% if user_signed_in? %>
+        <%= link_to public_user_path(current_user.id) do %>
+          <div><%= image_tag('wheat.jpg' ,size:"150x150" ) %></div>
+          <span>マイページ</span>
+        <% end %>
+        <%= link_to new_public_suggestions_path do %>
+          <div><%= image_tag('bird.jpg' ,size:"150x150" ) %></div>
+          <span>投書箱</span>
+        <% end %>
+      <% end %>
+      <%= link_to public_users_path do %>
+        <div><%= image_tag('tree.jpg', size:"150x150" ) %></div>
+        <span>ユーザー一覧</span>
+      <% end %>
+      <%= link_to public_groups_path do %>
+        <div><%= image_tag('coffeecup.jpg', size:"150x150" ) %></div>
+        <span>グループ一覧</span>
+      <% end %>
+      <%= link_to about_path do %>
+        <div><%= image_tag('well.jpg', size:"150x150" ) %></div>
+        <span>どんなサイト？</span>
+      <% end %>
+  </div>
+</div>

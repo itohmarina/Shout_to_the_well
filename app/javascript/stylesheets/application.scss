@@ -3,43 +3,51 @@
 
 
 a{
-  color:black;
+  color: midiumblue;
+  font-weight: bold;
 }
 
-.bg-dark {
-  background-color: #b22222 !important;
+div{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  margin: 0 0 10 10;
 }
 
-.btn-outline-dark{
-  background-color: #ffe5cc;
+main{
+  margin: 0 50px;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+//ヘッダー
+.bg-light {
+  background-color: #87cefa !important;
 }
+
+//ヘッダーアイテム
+.btn-outline-primary{
+  background-color: #e0ffff;
+}
+
+.navbar-nav li{
+  margin-right: 20px;
+}
+
+.search_form{
+  margin: auto;
+}
+
 
 body {
   margin-bottom: 60px;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  background-color: #9acd32;
-}
+
 
 .container {
   width: 100%;
-  max-width: 680px;
   padding: 0 15px;
 }
 
-.container .text-muted {
-  margin: 20px 0;
-}
 
 .deeppink {
   color: #ff1493;

@@ -3,7 +3,6 @@ class Public::UsersController < ApplicationController
 
   def show
     @user=User.find(params[:id])
-    @stories=@user.stories
     @group_users = GroupUser.where(user_id: current_user, request_is_accepted: false)
   end
 
