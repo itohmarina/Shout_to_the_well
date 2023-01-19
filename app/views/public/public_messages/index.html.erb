@@ -1,19 +1,20 @@
 <h2>ここは公開チャットコーナーです</h2>
 <h6>公序良俗に違反するような内容があった場合、予告なく管理者がメッセージを削除したり、違反したユーザーを退会させる場合があります。</h6>
 
-<% if @public_messages.present? %>
-  <% @public_messages.each do |public_message| %>
-    <div>
-      <%= public_message.created_at.strftime('%Y/%m/%d') %><br>
-      <%= public_message.user.name %>:<%= public_message.body %>
-
-      <% if current_user == public_message.user || admin_signed_in? %>
-        <%= link_to 'Destroy', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
-      <% end %>
-
-    </div>
+<table>
+  <% if @public_messages.present? %>
+    <% @public_messages.each do |public_message| %>
+      <tr>
+        <td><%= public_message.created_at.strftime('%Y/%m/%d') %></td>
+        <td><%= public_message.user.name %>:</td><td><%= public_message.body %></td>
+        <td>
+          <% if current_user == public_message.user || admin_signed_in? %>
+            <span><%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></span>
+          <% end %>
+        </td>
+    <% end %>
   <% end %>
-<% end %>
+</table>
 
 <div>
   <%= form_with model: @public_message, url: public_messages_path, method: :post do |f| %>
