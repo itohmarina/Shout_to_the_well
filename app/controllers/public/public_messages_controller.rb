@@ -1,7 +1,7 @@
 class Public::PublicMessagesController < ApplicationController
 
   def index
-    @public_messages = PublicMessage.all
+    @public_messages = PublicMessage.page(params[:page])
     @public_message = PublicMessage.new
   end
 

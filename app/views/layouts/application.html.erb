@@ -43,13 +43,15 @@
               </li>
             <% end %>
             </ul>
-            <%= render 'public/searches/search', genres:@genres %>
+            <%= render 'public/searches/search', genres: @genres %>
           </div>
         </div>
       </nav>
     </header>
     <main class="mb-auto">
-      <%= yield %>
+      <div class="main-container">
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>

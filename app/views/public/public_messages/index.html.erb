@@ -15,6 +15,7 @@
     <% end %>
   <% end %>
 </table>
+<%= paginate @public_messages %>
 
 <div>
   <%= form_with model: @public_message, url: public_messages_path, method: :post do |f| %>
@@ -22,3 +23,4 @@
     <%= f.submit "投稿",class:"btn btn-primary" %>
   <% end %>
 </div>
+

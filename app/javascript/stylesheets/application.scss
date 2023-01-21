@@ -8,15 +8,27 @@ a{
   font-weight: bold;
 }
 
-div{
+.white{
+  background-color: #ffffff;
+}
+
+div .top-items, .user-items{
   display: flex;
   flex-wrap: wrap;
   text-align: center;
   margin: 0 0 10 10;
 }
 
+
+
 main{
-  margin: 0 50px;
+  margin: 0px;
+}
+
+.main-container{
+  background-image: url(../../assets/images/digital-diamond.png) ;
+  min-height: 800px;
+  background-size: cover;
 }
 
 //ヘッダー
@@ -57,3 +69,9 @@ body {
 .public-messages{
   margin: 5px ;
 }
+
+.story-comment{
+  border: 2px solid #ffd700;
+  border-radius: 10px;
+}
+
