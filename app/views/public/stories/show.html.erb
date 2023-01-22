@@ -11,8 +11,10 @@
       </div>
     </div>
     <div class='col-md-8 offset-md-1 white'>
-  		<h2><%= @story.title %></h2>
-      <div>
+  		<div class="story-title">
+  		  <h2><%= @story.title %></h2>
+      </div>
+      <div class="story-body">
         <%= @story.body %>
       </div>
       <div>
@@ -42,7 +44,7 @@
         <% end %>
         <%= paginate @story_comments %>
       </div>
-      <div>
+      <div class="comment-form">
         <h6>送りたいコメントを選んでください</h6>
         <%= form_with model:[:public, @story, @story_comment], local:true, method: :post do |f| %>
           <% @comments.each do |comment| %>

@@ -1,4 +1,5 @@
 class Public::GroupUsersController < ApplicationController
+  before_action :authenticate_user!
 
   def new
     @users = current_user.followings

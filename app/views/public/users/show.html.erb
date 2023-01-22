@@ -1,26 +1,34 @@
-<div>
-  <%= flash[:notice] %>
-</div>
-
 <div class='container'>
   <div class='row'>
-    <div class='col-md-3 d-grid gap-2'>
+    <div class='col-md-3'>
       <%= render 'public/users/info', user:@user %><br>
     </div>
     <div class='col-md-8 offset-md-1 user-items'>
-      <%= link_to public_path(@user.id) do %>
-        <div><%= image_tag('books.jpg' ,size:"150x150" ) %></div>
-        <span>ストーリー一覧</span>
-      <% end %>
-      <%= link_to new_public_story_path do %>
-        <div><%= image_tag('manuscript.jpg' ,size:"150x150" ) %></div>
-        <span>ストーリーを投稿する</span>
-      <% end %>
-      <%= link_to public_favorite_path(@user.id) do %>
-        <div><%= image_tag('lily.jpg' ,size:"150x150" ) %></div>
-        <span>お気に入りのストーリー一覧</span>
-      <% end %>
-      <div class="deeppink">
+      <div class="user-item">
+        <%= link_to public_path(@user.id) do %>
+          <div><%= image_tag('books.jpg' ,size:"150x150" ) %></div>
+          <span>ストーリー一覧</span>
+        <% end %>
+      </div>
+      <div class="user-item">
+        <%= link_to new_public_story_path do %>
+          <div><%= image_tag('manuscript.jpg' ,size:"150x150" ) %></div>
+          <span>ストーリーを投稿する</span>
+        <% end %>
+      </div>
+      <div class="user-item">
+        <%= link_to public_favorite_path(@user.id) do %>
+          <div><%= image_tag('lily.jpg' ,size:"150x150" ) %></div>
+          <span>お気に入りのストーリー一覧</span>
+        <% end %>
+      </div>
+      <div class="user-item">
+        <%= link_to public_users_group_index_path(@user.id) do %>
+          <div><%= image_tag('coffeecup.jpg' ,size:"150x150" ) %></div>
+          <span>参加しているグループ一覧</span>
+        <% end %>
+      </div>
+      <div class="deeppink user-item">
         <% if @group_users.present? %>
           <% @group_users.each do |group_user| %>
             <i class="far fa-envelope"></i><%= group_user.group.name %>へ招待されています。
@@ -28,10 +36,6 @@
           <% end %>
         <% end %>
       </div>
-      <%= link_to public_users_group_index_path(@user.id) do %>
-        <div><%= image_tag('coffeecup.jpg' ,size:"150x150" ) %></div>
-        <span>参加しているグループ一覧</span>
-      <% end %>
     </div>
   </div>
   

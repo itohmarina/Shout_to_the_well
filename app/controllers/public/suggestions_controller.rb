@@ -1,4 +1,6 @@
 class Public::SuggestionsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @suggestion =Suggestion.new
   end

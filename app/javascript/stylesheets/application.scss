@@ -12,23 +12,27 @@ a{
   background-color: #ffffff;
 }
 
-div .top-items, .user-items{
+.top-items, .user-items{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   text-align: center;
-  margin: 0 0 10 10;
+  max-width: 1000px;
+}
+
+.top-items > div, .user-items > div {
+  width: 180px;
+  height: 180px;
+  margin: 10px;
 }
 
 
-
-main{
-  margin: 0px;
-}
 
 .main-container{
   background-image: url(../../assets/images/digital-diamond.png) ;
-  min-height: 800px;
+  min-height: 550px;
   background-size: cover;
+  padding: 30px;
 }
 
 //ヘッダー
@@ -50,17 +54,20 @@ main{
 }
 
 
-body {
-  margin-bottom: 60px;
+.public-message-form{
+  width: 500px;
+  margin-top: 50px;
 }
-
-
 
 .container {
   width: 100%;
   padding: 0 15px;
 }
 
+.user-info{
+  border-radius: 10px;
+  background-color: #ffffff;
+}
 
 .deeppink {
   color: #ff1493;
@@ -70,8 +77,20 @@ body {
   margin: 5px ;
 }
 
+.story-title{
+  margin: 20px;
+}
+
+.story-body{
+  margin: 30px 0;
+}
+
 .story-comment{
-  border: 2px solid #ffd700;
+  display: inline-block;
+  border: 1px solid #ffd700;
   border-radius: 10px;
 }
 
+.comment-form{
+  margin-top: 30px;
+}

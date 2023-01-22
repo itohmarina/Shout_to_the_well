@@ -1,4 +1,5 @@
 class Public::PublicMessagesController < ApplicationController
+  before_action :authenticate_user!, except:[:index]
 
   def index
     @public_messages = PublicMessage.page(params[:page])
@@ -6,6 +7,9 @@ class Public::PublicMessagesController < ApplicationController
   end
 
   def create
+    unless user_signed_in?
+      redirect_to request.referer
+    end 
     @public_message = PublicMessage.new(public_message_params)
     @public_message.user_id = current_user.id
     @public_message.save
@@ -13,6 +17,9 @@ class Public::PublicMessagesController < ApplicationController
   end
 
   def destroy
+    unless user_signed_in?
+      redirect_to request.referer
+    end 
     @public_message = PublicMessage.find(params[:id])
     @public_message.destroy
     redirect_to public_messages_path
@@ -32,5 +39,6 @@ class Public::PublicMessagesController < ApplicationController
       redirect_to users_my_page_path(login_user_id)
     end
   end
+
 
 end

@@ -1,12 +1,11 @@
 class Story < ApplicationRecord
-
-  # has_one_attached :story_image
+  
 
   belongs_to :user
   belongs_to :genre
   has_many :favorites, dependent: :destroy
   has_many :favoriting_user, through: :favorites, source: :user
-  has_many :story_comments
+  has_many :story_comments, dependent: :destroy
   has_many :comments, through: :story_comments, source: :comment
 
   def favorited_by?(user)

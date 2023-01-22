@@ -1,15 +1,9 @@
-<div>
-  <%= flash[:notice] %>
-</div>
-
 <div class='container'>
   <div class='row'>
     <div class='col-md-3'>
-      <h2>User info</h2>
       <%= render 'public/users/info', user: @user %>
     </div>
-    <div class='col-md-8 offset-md-1'>
-  		<h2>New Story</h2>
+    <div class='col-md-8 offset-md-1 story-form'>
   		<%= form_with model: @story, url: public_stories_path, method: :post do |f| %>
   		  <%= f.text_area :title, placeholder:"タイトルを入れてください", cols:"50", rows:"1" %><br>
   		  <%= f.text_area :body, placeholder:"本文を入れてください", cols:"50", rows:"10" %><br>

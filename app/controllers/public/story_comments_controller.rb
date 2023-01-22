@@ -1,4 +1,5 @@
 class Public::StoryCommentsController < ApplicationController
+  before_action :authenticate
 
   def create
     @story = Story.find(params[:story_id])
@@ -21,4 +22,14 @@ class Public::StoryCommentsController < ApplicationController
       render "public/story/show"
     end
   end
+
+  private
+
+  def authenticate
+    unless user_signed_in?
+      flash[:notice] = "ログインすると、コメントをことができます"
+      redirect_to request.referer
+    end
+  end
+
 end

@@ -1,5 +1,6 @@
 class Public::StoriesController < ApplicationController
-
+  before_action :authenticate_user!, except:[:show]
+  
   def show
     @story=Story.find(params[:id])
     @user=User.find(@story.user_id)

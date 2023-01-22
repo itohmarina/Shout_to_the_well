@@ -1,4 +1,5 @@
 class Public::GroupMessagesController < ApplicationController
+  before_action :authenticate_user!
   before_action :for_group_show
 
   def create

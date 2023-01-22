@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!
-
+  before_action :authenticate_user!, except: [:show, :index, :story_index]
+  
   def show
     @user=User.find(params[:id])
     @group_users = GroupUser.where(user_id: current_user, request_is_accepted: false)

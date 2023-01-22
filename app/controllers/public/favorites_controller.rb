@@ -1,5 +1,7 @@
 class Public::FavoritesController < ApplicationController
-
+  before_action :authenticate_user!, only:[:show]
+  before_action :authenticate
+  
   def show
     @user=User.find(params[:id])
     @stories=@user.favorite_stories
@@ -18,5 +20,15 @@ class Public::FavoritesController < ApplicationController
     favorite.destroy
     redirect_to request.referer
   end
+
+
+  private
+  
+  def authenticate
+    unless user_signed_in?
+      flash[:notice] = "ログインすると、「いいね」できます"
+      redirect_to request.referer
+    end
+  end 
 
 end
