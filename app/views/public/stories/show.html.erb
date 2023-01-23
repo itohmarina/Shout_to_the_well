@@ -1,7 +1,3 @@
-<div>
-  <%= flash[:notice] %>
-</div>
-
 <div class='container'>
   <div class='row'>
     <div class='col-md-3 white'>
@@ -19,7 +15,7 @@
       </div>
       <div>
         <div>
-          <% if @story.user==current_user %>
+          <% if @story.user == current_user %>
             <%= link_to 'Edit', edit_public_story_path(@story), class: "btn btn-sm btn-success" %></td>
             <%= link_to 'Destroy', public_story_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
           <% end %>

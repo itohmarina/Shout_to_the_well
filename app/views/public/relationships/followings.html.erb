@@ -8,3 +8,10 @@
     </div>
   <% end %>
 <% end %>
+<div>
+  <% if user_signed_in? && @user == current_user %>
+    <%= link_to "マイページに戻る", public_user_path(current_user.id) %>
+  <% else %>
+    <%= link_to "ユーザーページに戻る", public_user_path(@user.id) %>
+  <% end %>
+</div>

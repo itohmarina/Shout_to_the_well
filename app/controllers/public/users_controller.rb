@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index, :story_index]
-  
+
   def show
     @user=User.find(params[:id])
     @group_users = GroupUser.where(user_id: current_user, request_is_accepted: false)
@@ -11,8 +11,9 @@ class Public::UsersController < ApplicationController
   end
 
   def story_index
-    @user=User.find(params[:id])
-    @stories=@user.stories
+    @user = User.find(params[:id])
+    @stories = @user.stories.where(is_private: false)
+    @private_stories = @user.stories.where(is_private: true)
   end
 
   def edit

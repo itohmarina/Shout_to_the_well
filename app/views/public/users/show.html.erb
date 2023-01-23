@@ -11,12 +11,6 @@
         <% end %>
       </div>
       <div class="user-item">
-        <%= link_to new_public_story_path do %>
-          <div><%= image_tag('manuscript.jpg' ,size:"150x150" ) %></div>
-          <span>ストーリーを投稿する</span>
-        <% end %>
-      </div>
-      <div class="user-item">
         <%= link_to public_favorite_path(@user.id) do %>
           <div><%= image_tag('lily.jpg' ,size:"150x150" ) %></div>
           <span>お気に入りのストーリー一覧</span>
@@ -28,6 +22,14 @@
           <span>参加しているグループ一覧</span>
         <% end %>
       </div>
+      <% if user_signed_in? && @user == current_user %>
+        <div class="user-item">
+          <%= link_to new_public_story_path do %>
+            <div><%= image_tag('manuscript.jpg' ,size:"150x150" ) %></div>
+            <span>ストーリーを投稿する</span>
+          <% end %>
+        </div>
+      <% end %>
       <div class="deeppink user-item">
         <% if @group_users.present? %>
           <% @group_users.each do |group_user| %>

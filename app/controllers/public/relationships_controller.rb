@@ -1,5 +1,5 @@
 class Public::RelationshipsController < ApplicationController
-　before_action :authenticate_user!, only:[:create, :destroy]
+  before_action :authenticate_user!, only:[:create, :destroy]
 
   def create
     current_user.follow(params[:user_id])
@@ -13,13 +13,13 @@ class Public::RelationshipsController < ApplicationController
 
 #フォロー一覧、フォロワー一覧
   def followings
-    user = User.find(params[:user_id])
-    @users = user.followings
+    @user = User.find(params[:user_id])
+    @users = @user.followings.where(is_deleted: false)
   end
 
   def followers
-    user = User.find(params[:user_id])
-    @users = user.followers
+    @user = User.find(params[:user_id])
+    @users = @user.followers.where(is_deleted: false)
   end
 
 

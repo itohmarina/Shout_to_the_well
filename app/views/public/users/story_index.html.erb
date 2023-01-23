@@ -10,7 +10,7 @@
               <%= render "public/favorites/favorite", story: story %>
             </td>
             <td>コメント数:<%= story.story_comments.count %></td>
-            <% if story.user==current_user %>
+            <% if user_signed_in? && story.user == current_user %>
               <td><%= link_to '編集', edit_public_story_path(story.id), class: "btn btn-sm btn-outline-success" %></td>
               <td><%= link_to '削除', public_story_path(story.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%></td>
             <% end %>
@@ -19,4 +19,10 @@
       <% end %>
     </tbody>
 </table>
-<%= link_to "ユーザーページへ戻る", public_user_path(@user.id) %>
+<div>
+  <% if user_signed_in? && @user == current_user %>
+    <%= link_to "マイページに戻る", public_user_path(current_user.id) %>
+  <% else %>
+    <%= link_to "ユーザーページに戻る", public_user_path(@user.id) %>
+  <% end %>
+</div>
