@@ -49,8 +49,9 @@
           <% end %>
         <% end %>
         <div>
-          <%= form_with model:[:public, @group, @group_message], local:true, method: :post do |f| %>
-            <%= f.text_area :body, placeholder:"メッセージを入れてください", cols:"50", rows:"2" %>
+          <%= form_with model:[:public, @group, @group_message], method: :post do |f| %>
+            <%= f.text_area :body, placeholder:"メッセージを入れてください(200文字以内)", class: "input-text", cols:"50", rows:"2" %>
+            <p class = "counter">0文字</p>
             <%= f.submit "投稿",class:"btn btn-primary" %>
           <% end %>
         </div>

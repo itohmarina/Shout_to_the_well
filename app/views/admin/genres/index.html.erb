@@ -13,7 +13,7 @@
 <% end %>
 
 <%= form_with model: Genre.new, url: admin_genres_path, method: :post do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.label :name, "ジャンル名(10文字以内)" %>
+  <%= f.text_field :name, placeholder: "ジャンル名を入力してください" %>
   <%= f.submit "ジャンルを作成する" %>
 <% end %>

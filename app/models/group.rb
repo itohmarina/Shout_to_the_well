@@ -1,4 +1,7 @@
 class Group < ApplicationRecord
+  
+  validates :name, presence: true, length: { in: 1..20 }
+  validates :introduction, length: { maximum: 200 }
 
   has_many :group_users, foreign_key: "group_id"
   has_many :users, through: :group_users, source: :user

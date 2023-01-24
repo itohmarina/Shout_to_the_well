@@ -1,6 +1,6 @@
 class Public::StoriesController < ApplicationController
   before_action :authenticate_user!, except:[:show]
-  
+
   def show
     @story=Story.find(params[:id])
     @user=User.find(@story.user_id)
@@ -61,7 +61,7 @@ class Public::StoriesController < ApplicationController
   private
 
   def story_params
-    params.require(:story).permit(:genre_id, :title, :body, :is_private)
+    params.require(:story).permit(:genre_id, :title, :summary, :body, :is_private)
   end
 
   def is_matching_login_user

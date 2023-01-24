@@ -11,7 +11,9 @@
 <% end %>
 <div>
   <%= form_with model: @comment, url: admin_comments_path, method: :post do |f| %>
-    <%= f.text_field :body, placeholder:"コメントを入力してください" %>
+    <%= f.label :body, "コメント作成(50文字以内)" %>
+    <%= f.text_area :body, placeholder:"コメントを入力してください", class: "title-text" %>
+    <p class = "title-counter">0文字</p>
     <%= f.submit "コメント作成", class:"btn btn-primary" %>
   <% end %>
 </div>

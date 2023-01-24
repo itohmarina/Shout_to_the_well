@@ -17,10 +17,8 @@ class Public::PublicMessagesController < ApplicationController
   end
 
   def destroy
-    unless user_signed_in?
-      redirect_to request.referer
-    end 
     @public_message = PublicMessage.find(params[:id])
+    is_matching_login_users
     @public_message.destroy
     redirect_to public_messages_path
   end
@@ -31,12 +29,12 @@ class Public::PublicMessagesController < ApplicationController
     params.require(:public_message).permit(:body)
   end
 
-  #admin機能つけたら、destroyに追加する
+  #コメントは、投稿者と管理者のみが削除
   def is_matching_login_users
     user_id=@public_message.user_id.to_i
     login_user_id = current_user.id
     if(user_id != login_user_id) && (admin != login_user_id)
-      redirect_to users_my_page_path(login_user_id)
+      redirect_to public_user_path(login_user_id)
     end
   end
 

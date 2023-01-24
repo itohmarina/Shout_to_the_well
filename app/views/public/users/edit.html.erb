@@ -1,6 +1,4 @@
-<div>
-  <%= flash[:notice] %>
-</div>
+
 <div class='container'>
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
@@ -8,16 +6,17 @@
     <%= form_with model:@user, url: public_user_path(@user.id),local:true, method: :patch do |f| %>
       <%= render 'layouts/errors', obj: @user %>
       <div class="form-group">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control name" %>
+        <%= f.label :name, "ニックネーム(20文字以内)" %>
+        <%= f.text_field :name, placeholder:"ニックネームを入れてください", class: "form-control name" %>
       </div>
      <div class="form-group">
-        <%= f.label :image %>
+        <%= f.label :image, "アイコン" %>
         <%= f.file_field :user_image, class: "form-control-file user_image", accept: 'image/*' %>
       </div>
       <div class="form-group">
-        <%= f.label :introduction %>
-        <%= f.text_area :introduction, class: "form-control introduction" %>
+        <%= f.label :introduction, "自己紹介(200文字以内)" %>
+        <%= f.text_area :introduction, placeholder:"紹介文をいれてください", class: "input-text form-control introduction" %>
+        <p class = "counter">0</p>
       </div>
       <div class="form-group">
         <%= f.submit "情報を更新する", class: 'btn btn-secondary' %>

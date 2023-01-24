@@ -18,15 +18,9 @@
 <%= paginate @public_messages %>
 
 <% if user_signed_in? %>
-  <div>
-    <%= form_with model: @public_message, url: public_messages_path, method: :post do |f| %>
-      <%= f.text_area :body, placeholder:"メッセージを入れてください", cols:"50", rows:"2" %>
-      <%= f.submit "投稿",class:"btn btn-primary" %>
-    <% end %>
-  </div>
+  <%= render "public/public_messages/form", public_message: @public_message %>
 <% else %>
   <div class="public-message-form white">
     <h5>ログインすると、コメントできます。</h5>
   </div>
 <% end %>
-

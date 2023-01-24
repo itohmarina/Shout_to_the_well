@@ -1,0 +1,7 @@
+  <%= form_with model: public_message, url: public_messages_path, method: :post do |f| %>
+    <div>
+      <%= f.text_area :body, placeholder:"メッセージを入れてください(200文字以内)", class: "input-text", cols:"50", rows:"2" %>
+      <p class = "counter">0文字</p>
+      <%= f.submit "投稿",class:"btn btn-primary" %>
+    </div>
+  <% end %>
