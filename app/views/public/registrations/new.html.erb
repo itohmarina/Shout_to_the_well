@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<h2>新規登録</h2>
 
 <%= form_with model: @user, url: user_registration_path do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
@@ -27,7 +27,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録", class: "btn btn-success" %>
   </div>
 <% end %>
 

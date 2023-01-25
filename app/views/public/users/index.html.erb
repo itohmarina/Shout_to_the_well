@@ -1,9 +1,13 @@
 <h2>ユーザー一覧</h2>
+<% if admin_signed_in? %>
+  <%= link_to '退会済みのユーザー一覧はこちら', admin_users_path %>
+<% end %>
 <table class='table'>
   <% if @users.present? %>
     <% @users.each do |user| %>
     <tr>
       <td><%= link_to user.name, public_user_path(user.id) %></td>
+      <td><%= user.introduction </td>
     </tr>
     <% end %>
   <% end %>

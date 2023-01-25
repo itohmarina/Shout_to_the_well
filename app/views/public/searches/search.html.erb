@@ -1,25 +1,52 @@
-<h2>User名のStoryなど一覧</h2>
+<% if @range == "User" %>
+  <h2><%= @word %>を含むユーザー一覧</h2>
+<% elsif @range == "Story" %>
+  <h2><%= @word %>を含むストーリー一覧</h2>
+  <% if @genre.present? %>
+    <div>
+      <h5>ジャンル名:<%= @genre %>を表示しています</h5>
+    </div>
+  <% end %>
+<% else %>
+  <h2><%= @word %>を含むグループ一覧</h2>
+<% end %>
 
 <table class="table table-hover table-inverse">
   <!--検索対象モデルがUserの時 -->
   <% if @range == "User" %>
     <tbody>
       <% if @users.present? %>
+        <h6>新規登録順</h6>
         <% @users.each do |user| %>
           <tr>
             <td><%= user.name %></td>
+            <td><%= user.introduction %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% elsif @range == "Story" %>
+    <!--検索対象モデルがStoryの時) -->
+    <tbody>
+      <% if @stories.present? %>
+        <h6>新規投稿順</h6>
+        <% @stories.each do |story| %>
+          <tr>
+            <td><%= story.title %></td>
+            <td><%= story.summary %></td>
           </tr>
         <% end %>
       <% end %>
     </tbody>
   <% else %>
-    <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
+    <!--検索対象モデルがGroupの時-->
     <tbody>
-      <% if @stories.present? %>
-        <% @stories.each do |story| %>
+      <% if @groups.present? %>
+        <h6>新規作成順</h6>
+        <% @groups.each do |group| %>
           <tr>
-            <td><%= story.title %></td>
-            <td><%= story.body %></td>
+            <td><%= group.name %></td>
+            <td><%= group.introduction %></td>
           </tr>
         <% end %>
       <% end %>

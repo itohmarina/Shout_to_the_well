@@ -3,8 +3,8 @@
     <%= form_with url: search_path, local: true, method: :get do |f| %>
       <%= f.text_field :word %>
       <%= f.select :range, options_for_select([['Story'],['User'],['Group']]) %>
-      <%= select_tag :genre, options_from_collection_for_select(Genre.all, :id, :name), {prompt: 'ジャンルを選択'} %>
-      <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+      <%= select_tag :genre, options_from_collection_for_select(@genres, :id, :name), {prompt: 'ジャンルを選択'} %>
+      <%= f.select :search, options_for_select([["部分一致","partial_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"],["完全一致","perfect_match"]]) %>
       <%= f.submit "検索", class: "btn btn-primary" %>
     <% end %>
   </div>

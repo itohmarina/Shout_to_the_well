@@ -1,5 +1,5 @@
 class Story < ApplicationRecord
-  
+
   validates :title, length: { in: 1..50 }
   validates :body, length: { in: 1..2000 }
   validates :summary, length: { maximum: 100 }
@@ -18,16 +18,17 @@ class Story < ApplicationRecord
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
-      @story = Story.where("title LIKE?","#{word}")
+      stories = Story.where("title LIKE?","#{word}")
     elsif search == "forward_match"
-      @story = Story.where("title LIKE?","#{word}%")
+      stories = Story.where("title LIKE?","#{word}%")
     elsif search == "backward_match"
-      @story = Story.where("title LIKE?","%#{word}")
+      stories = Story.where("title LIKE?","%#{word}")
     elsif search == "partial_match"
-      @story = Story.where("title LIKE?","%#{word}%")
+      stories = Story.where("title LIKE?","%#{word}%")
     else
-      @story = Story.all
+      stories = Story.all
     end
+    @stories = stories.where(is_deleted: false, is_private: false)
   end
 
   #今日の投稿数検索

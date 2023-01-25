@@ -4,18 +4,18 @@ class Public::SearchesController < ApplicationController
   def search
     @range = params[:range]
     @genre = params[:genre]
-
+    @word = params[:word]
+    
     if @range == "Story"
-      @stories = Story.looks(params[:search], params[:word])
+      @stories = Story.looks(params[:search], params[:word]).order(id: "DESC")
       if @genre.present?
-        @stories = @stories.where(genre_id: @genre.to_i)
+        @stories = @stories.where(genre_id: @genre.to_i).order(id: "DESC")
       end
     elsif @range == "User"
-      @users = User.looks(params[:search], params[:word])
+      @users = User.looks(params[:search], params[:word]).order(id: "DESC")
     else
-      @groups = Group.looks(params[:search], params[:word])
+      @groups = Group.looks(params[:search], params[:word]).order(id: "DESC")
     end
-
 
   end
 

@@ -13,7 +13,8 @@ class Public::StoriesController < ApplicationController
   end
 
   def index
-    @stories = Story.all.where(is_private: false, is_deleted: false)
+    stories = Story.where(is_private: false, is_deleted: false)
+    @stories = stories.select('stories.*', 'count(favorites.id) AS favs').left_joins(:favorites).group('stories.id').order('favs desc')
   end
 
   def new
@@ -58,10 +59,10 @@ class Public::StoriesController < ApplicationController
 
     if @story.destroy
       flash[:notice]="ストーリーを削除しました"
-      redirect_to users_my_page_path
+      redirect_to public_user_path
     else
       @user = current_user
-      render "public/users/show"
+      render "public/users/story_index"
     end
   end
 
@@ -75,7 +76,7 @@ class Public::StoriesController < ApplicationController
     user_id=@story.user_id.to_i
     login_user_id = current_user.id
     if(user_id != login_user_id)
-      redirect_to users_my_page_path(login_user_id)
+      redirect_to public_user_path(login_user_id)
     end
   end
 

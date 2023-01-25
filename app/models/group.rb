@@ -13,5 +13,20 @@ class Group < ApplicationRecord
     (group_image.attached?) ? group_image : 'no_image.jpg'
   end
 
-
+  # 検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      groups = Group.where("name LIKE?", "#{word}")
+    elsif search == "forward_match"
+      groups = Group.where("name LIKE?","#{word}%")
+    elsif search == "backward_match"
+      groups = Group.where("name LIKE?","%#{word}")
+    elsif search == "partial_match"
+      groups = Group.where("name LIKE?","%#{word}%")
+    else
+      groups = Group.all
+    end
+    @groups = groups.where(is_deleted: false)
+  end
+  
 end

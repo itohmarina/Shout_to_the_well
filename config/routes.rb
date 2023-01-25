@@ -60,6 +60,8 @@ Rails.application.routes.draw do
     get 'suggestions/confirm' => 'suggestions#confirm'
     get 'suggestions/thanks' => 'suggestions#thanks'
 
+    resources :genres, only:[:show]
+
   end
 
 
