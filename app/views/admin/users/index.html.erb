@@ -1,9 +1,9 @@
-<h2>ユーザー一覧</h2>
+<h2>退会中のユーザー一覧</h2>
 
 <% if @users.present? %>
   <% @users.each do |user| %>
     <div>
-      <%= link_to "#{user.name}", admin_user_path(user.id) %>
+      <%= link_to "#{user.name}", public_user_path(user.id) %>
       <% if user.is_deleted == false %>
         有効
       <% else %>

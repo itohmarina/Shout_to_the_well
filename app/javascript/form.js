@@ -26,27 +26,27 @@ $(function(){
 });
 
 $(function(){
-  $("#summary-text").on("input", function() {
+  $(".summary-text").on("input", function() {
     let countNum = String($(this).val().length);
-    $("#summary-counter").text(countNum + "文字");
+    $(".summary-counter").text(countNum + "文字");
     if (countNum > 100) {
-      $("#summary-counter").css("color","red");
-      $("#summary-counter").text("100文字以内で記入してください");
+      $(".summary-counter").css("color","red");
+      $(".summary-counter").text("100文字以内で記入してください");
     } else {
-      $("#summary-counter").css("color","black");
+      $(".summary-counter").css("color","black");
     }
   });
 });
 
 $(function(){
-  $("#story-text").on("input", function() {
+  $(".story-text").on("input", function() {
     let countNum = String($(this).val().length);
-    $("#story-counter").text(countNum + "文字");
+    $(".story-counter").text(countNum + "文字");
     if (countNum > 2000) {
-      $("#story-counter").css("color","red");
-      $("#story-counter").text("2000文字以内で記入してください");
+      $(".story-counter").css("color","red");
+      $(".story-counter").text("2000文字以内で記入してください");
     } else {
-      $("#story-counter").css("color","black");
+      $(".story-counter").css("color","black");
     }
   });
 });

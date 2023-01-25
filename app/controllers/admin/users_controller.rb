@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-    @users=User.all
+    @users = User.all.where(is_deleted: true)
   end
 
   def show

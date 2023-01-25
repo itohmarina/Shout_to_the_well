@@ -38,4 +38,13 @@
     <th>フォロワー</th>
     <td><%= link_to "#{user.followers.count}人", public_user_relationships_followers_path(@user.id) %></td>
   </tr>
+  <tr>
+    <% if admin_signed_in? %>
+        <% if user.is_deleted == false %>
+          <th colspan="2"><%= link_to '退会させる', admin_user_path(user.id), method: :patch, data: { confirm: '本当に退会させますか？' }, class: "btn btn-sm btn-danger"%></th>
+        <% else %>
+          <th colspan="2"><%= link_to '有効化する', admin_user_path(user.id), method: :patch, data: { confirm: 'ユーザーを有効化しますか？' }, class: "btn btn-sm btn-success"%></th>
+        <% end %>
+    <% end %>
+  </tr>
 </table>

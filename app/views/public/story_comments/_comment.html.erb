@@ -1,0 +1,27 @@
+<div>コメント数:<%= story_comments.count %></div>
+<% if story_comments.present? %>
+  <% story_comments.each do |story_comment| %>
+    <div>
+      <%= image_tag story_comment.user.get_user_image, size:"30x30", class:"rounded-circle border border-warning" %>
+      <div  class="story-comment">
+        <%= story_comment.comment.body %>
+        <% if story_comment.user == current_user %>
+          <%= link_to "コメント削除", public_story_story_comment_path(story.id, story_comment.id), method: :delete %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<%= paginate story_comments %>
+<div class="comment-form">
+  <h6>送りたいコメントを選んでください</h6>
+  <%= form_with model:[:public, story, story_comment], method: :post do |f| %>
+    <% comments.each do |comment| %>
+      <div>
+        <%= f.radio_button :comment_id, comment.id %>
+        <%= f.label :comment_id, comment.body %>
+      </div>
+    <% end %>
+    <%= f.submit "送信", class:"btn btn-primary" %>
+  <% end %>
+</div>

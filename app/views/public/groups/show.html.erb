@@ -1,61 +1,13 @@
-<div>
-  <%= flash[:notice] %>
-</div>
-
 <div class='container'>
   <div class='row'>
     <div class='col-md-3'>
       <h2>Group info</h2>
-      <%= render 'public/groups/info', group: @group %><br>
-      <% if @group.users.include?(current_user) %>
-        <%= link_to edit_public_group_path do %>
-          <i class="fas fa-user-cog"></i>
-        <% end %>
-        <div>
-          <%= link_to "ほかのユーザーを招待する", new_public_group_group_users_path(@group.id) %>
-        </div>
-      <% end %>
-      <div>
-        <h5>グループメンバー一覧</h5>
-        <% @users.each do |user| %>
-          <div>
-            <%= image_tag user.get_user_image, size: "100x100" %>
-            <%= link_to "#{user.name}", public_user_path(user.id) %>
-          </div>
-        <% end %>
-      </div>
-      <% if @group.users.include?(current_user) %>
-        <div>
-          <% if current_user.id != @group.owner_id %>
-            <%= link_to "グループを退会する", public_group_group_users_path(@group.id), method: :delete %>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render 'public/groups/info', group: @group %>
     </div>
     <div class='col-md-8 offset-md-1'>
-      <% if @group.users.include?(current_user) %>
-    		<h5>チャットコーナー</h5>
-        <% if @group_messages.present? %>
-          <% @group_messages.each do |group_message| %>
-            <div>
-              <%= group_message.created_at.strftime('%Y/%m/%d') %><br>
-              <%= group_message.user.name %>:<%= group_message.body %>
-
-              <% if current_user.id == group_message.group.owner_id || admin_signed_in? %>
-                <%= link_to 'Destroy', public_group_group_message_path(@group.id, group_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
-              <% end %>
-
-            </div>
-          <% end %>
-        <% end %>
-        <div>
-          <%= form_with model:[:public, @group, @group_message], method: :post do |f| %>
-            <%= f.text_area :body, placeholder:"メッセージを入れてください(200文字以内)", class: "input-text", cols:"50", rows:"2" %>
-            <p class = "counter">0文字</p>
-            <%= f.submit "投稿",class:"btn btn-primary" %>
-          <% end %>
-        </div>
-      <% end %>
+      <div id="group_messages_<%= @group.id %>">
+        <%= render "public/group_messages/message", group_messages: @group_messages, group_message: @group_message, group: @group %>
+      </div>
     </div>
   </div>
 </div>

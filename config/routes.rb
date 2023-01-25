@@ -73,6 +73,8 @@ Rails.application.routes.draw do
     resources :users, only:[:show, :index, :update]
     resources :comments, only:[:index, :create, :update]
     resources :suggestions, only:[:index, :show]
+    resources :stories, only:[:update, :index]
+    resources :groups, only:[:update, :index]
   end
 
 

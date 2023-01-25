@@ -1,0 +1,22 @@
+<h2>閉鎖中のグループ一覧</h2>
+
+<% if @groups.present? %>
+  <% @groups.each do |group| %>
+    <div>
+      <%= link_to "#{group.name}", public_group_path(group.id) %>
+      <% if group.is_deleted == false %>
+        有効
+      <% else %>
+        閉鎖中
+      <% end %>
+      <% if admin_signed_in? %>
+        <% if group.is_deleted == false %>
+          <%= link_to '閉鎖する', admin_group_path(group.id), method: :patch, data: { confirm: '本当に閉鎖しますか？' }, class: "btn btn-sm btn-outline-danger"%>
+        <% else %>
+          <%= link_to '有効化する', admin_group_path(group.id), method: :patch, data: { confirm: 'グループを有効化しますか？' }, class: "btn btn-sm btn-outline-success"%>
+        <% end %>
+      <% end %>
+
+    </div>
+  <% end %>
+<% end %>

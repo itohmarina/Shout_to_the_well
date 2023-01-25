@@ -1,3 +1,58 @@
-<%= image_tag group.get_group_image, size:'100x100' %>
-<div><%= group.name %></div>
-<dev><%= group.introduction %></dev>
+<table class='table group-info white'>
+
+  <tr>
+    <th colspan="2"><%= image_tag group.get_group_image, size:'100x100' %></th>
+  </tr>
+  <tr>
+    <th colspan="2"><%= group.name %></th>
+  </tr>
+  <tr>
+    <% if group.introduction.present? %>
+      <td colspan="2"><%= group.introduction %></td>
+    <% end %>
+  </tr>
+
+  <% if @group.users.include?(current_user) %>
+    <tr>
+      <td colspan="2">
+        <%= link_to edit_public_group_path do %>
+          <i class="fas fa-user-cog"></i>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= link_to "ほかのユーザーを招待する", new_public_group_group_users_path(@group.id) %>
+      </td>
+    </tr>
+  <% end %>
+
+  <tr>
+    <th colspan="2"><h5>グループメンバー一覧</h5></th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <th><%= image_tag user.get_user_image, size: "100x100" %></th>
+      <th><%= link_to "#{user.name}", public_user_path(user.id) %></th>
+    </tr>
+  <% end %>
+
+  <% if @group.users.include?(current_user) %>
+    <% if current_user.id != @group.owner_id %>
+      <tr>
+        <td colspan="2"><%= link_to "グループを退会する", public_group_group_users_path(@group.id), method: :delete %></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% if admin_signed_in? %>
+    <tr>
+      <% if group.is_deleted == false %>
+        <td colspan="2"><%= link_to '閉鎖する', admin_group_path(group.id), method: :patch, data: { confirm: '本当に閉鎖しますか？' }, class: "btn btn-sm btn-outline-danger"%></td>
+      <% else %>
+        <td colspan="2"><%= link_to '有効化する', admin_group_path(group.id), method: :patch, data: { confirm: 'グループを有効化しますか？' }, class: "btn btn-sm btn-outline-success"%></td>
+      <% end %>
+    </tr>
+  <% end %>
+
+</table>

@@ -1,18 +1,25 @@
 class Public::StoriesController < ApplicationController
-  before_action :authenticate_user!, except:[:show]
+  before_action :authenticate_user!, except:[:show, :index]
 
   def show
-    @story=Story.find(params[:id])
-    @user=User.find(@story.user_id)
-    @story_comments=@story.story_comments.page(params[:page])
-    @comments=Comment.all
-    @story_comment=StoryComment.new
+    @story = Story.find(params[:id])
+    if @story.is_private == true || @story.is_deleted == true
+      redirect_to request.referer
+    end
+    @user = User.find(@story.user_id)
+    @story_comments = @story.story_comments.page(params[:page])
+    @comments = Comment.all
+    @story_comment = StoryComment.new
+  end
+
+  def index
+    @stories = Story.all.where(is_private: false, is_deleted: false)
   end
 
   def new
-    @story=Story.new
-    @user=current_user
-    @genres=Genre.all
+    @story = Story.new
+    @user = current_user
+    @valid_genres = Genre.all.where(is_deleted: false)
   end
 
   def create
@@ -22,7 +29,7 @@ class Public::StoriesController < ApplicationController
     if @story.save!
       redirect_to public_story_path(@story.id), notice: "ストーリーを投稿しました"
     else
-      @genres = Genre.all
+      @valid_genres = Genre.all.where(is_deleted: false)
       render 'public/stories/new'
     end
   end
@@ -30,7 +37,7 @@ class Public::StoriesController < ApplicationController
   def edit
     @story = Story.find(params[:id])
     @user = current_user
-    @genres = Genre.all
+    @valid_genres = Genre.all.where(is_deleted: false)
     is_matching_login_user
   end
 

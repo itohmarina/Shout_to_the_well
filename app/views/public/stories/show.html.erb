@@ -1,5 +1,6 @@
 <div class='container'>
   <div class='row'>
+    
     <div class='col-md-3 white'>
       <%= render 'public/users/info', user:@user %>
       <div>
@@ -14,44 +15,25 @@
         <%= @story.body %>
       </div>
       <div>
+        <% if @story.user == current_user %>
+          <%= link_to '編集', edit_public_story_path(@story), class: "btn btn-sm btn-success" %></td>
+          <%= link_to '削除', public_story_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+        <% end %>
+      </div>
+      <% if admin_signed_in? %>
         <div>
-          <% if @story.user == current_user %>
-            <%= link_to 'Edit', edit_public_story_path(@story), class: "btn btn-sm btn-success" %></td>
-            <%= link_to 'Destroy', public_story_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+          <% if story.is_deleted == false %>
+            <%= link_to '閲覧制限をかける', admin_story_path(story.id), method: :patch, data: { confirm: '閲覧を制限しますか？' }, class: "btn btn-sm btn-outline-danger"%>
+          <% else %>
+            <%= link_to '制限を解除する', admin_story_path(story.id), method: :patch, data: { confirm: '制限を解除しますか？' }, class: "btn btn-sm btn-outline-success"%>
           <% end %>
         </div>
-        <%= render "public/favorites/favorite", story: @story %>
-        <div>コメント数:<%= @story_comments.count %></div>
+      <% end %>
+      <div class="favorite_buttons_<%= @story.id %>"><%= render "public/favorites/favorite", story: @story %></div>
+
+      <div id="story_comments_<%= @story.id %>">
+        <%= render "public/story_comments/comment", story_comments: @story_comments, story_comment: @story_comment, story: @story, comments: @comments %>
       </div>
-      <div id="">
-        <%#= render "book_comments/comment", book_comments: @book_comments, book: @book %>
-        <% if @story_comments.present? %>
-          <% @story_comments.each do |story_comment| %>
-            <div>
-              <%= image_tag story_comment.user.get_user_image, size:"30x30", class:"rounded-circle border border-warning" %>
-              <div  class="story-comment">
-                <%= story_comment.comment.body %>
-                <% if story_comment.user == current_user %>
-                  <%= link_to "コメント削除", public_story_story_comment_path(@story.id, story_comment.id), method: :delete %>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-        <%= paginate @story_comments %>
-      </div>
-      <div class="comment-form">
-        <h6>送りたいコメントを選んでください</h6>
-        <%= form_with model:[:public, @story, @story_comment], local:true, method: :post do |f| %>
-          <% @comments.each do |comment| %>
-            <div>
-            <%= f.radio_button :comment_id, comment.id %>
-            <%= f.label :comment_id, comment.body %>
-            </div>
-          <% end %>
-          <%= f.submit "送信", class:"btn btn-primary" %>
-        <% end %>
-      </div>
-    </div>
+
   </div>
 </div>

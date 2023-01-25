@@ -1,0 +1,22 @@
+<h2>閲覧制限中のストーリー一覧</h2>
+
+<% if @storys.present? %>
+  <% @storys.each do |story| %>
+    <div>
+      <%= link_to "#{story.title}", public_story_path(story.id) %>
+      <% if story.is_deleted == false %>
+        有効
+      <% else %>
+        制限中
+      <% end %>
+      <% if admin_signed_in? %>
+        <% if story.is_deleted == false %>
+          <%= link_to '閲覧制限をかける', admin_story_path(story.id), method: :patch, data: { confirm: '閲覧を制限しますか？' }, class: "btn btn-sm btn-outline-danger"%>
+        <% else %>
+          <%= link_to '制限を解除する', admin_story_path(story.id), method: :patch, data: { confirm: '制限を解除しますか？' }, class: "btn btn-sm btn-outline-success"%>
+        <% end %>
+      <% end %>
+
+    </div>
+  <% end %>
+<% end %>

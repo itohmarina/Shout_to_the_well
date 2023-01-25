@@ -1,13 +1,3 @@
-<h2>ストーリー</h2>
-<table>
-  <tbody>
-    <% if @stories.present? %>
-      <% @stories.each do |story| %>
-        <tr>
-          <td><%= story.title %></td>
-          <td><%= story.body %></td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+<h2>ストーリー一覧</h2>
+
+<%= render "public/stories/index", stories: @stories %>
