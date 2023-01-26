@@ -8,12 +8,12 @@
   <%= form_with model:[:public, @suggestion], url: public_suggestions_confirm_path, method: :get do |f| %>
     <%= render 'layouts/errors', obj: @suggestion %>
     <div class="form-group">
-      <%= f.label :title, "タイトル(50文字以内)" %>
+      <%= f.label :title, "タイトル(50文字以内)" %><br>
       <%= f.text_area :title, placeholder:"タイトルを入れてください", class: "title-text", cols:"50", rows:"1" %>
       <p class = "title-counter">0文字</p>
     </div>
     <div class="form-group">
-      <%= f.label :body, "本文(1200文字以内)" %>
+      <%= f.label :body, "本文(1200文字以内)" %><br>
       <%= f.text_area :body, placeholder:"本文を入れてください", id: "suggestion-text", cols:"50", rows:"10" %>
       <p id = "suggestion-counter">0文字</p>
     </div>

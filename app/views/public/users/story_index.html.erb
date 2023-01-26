@@ -1,7 +1,4 @@
 <h2><%= "#{@user.name}さんのストーリー一覧" %></h2>
-
-<%= render "public/stories/index", stories: @stories %>
-
 <div>
   <% if user_signed_in? && @user == current_user %>
     <%= link_to "マイページに戻る", public_user_path(current_user.id) %>
@@ -9,3 +6,9 @@
     <%= link_to "ユーザーページに戻る", public_user_path(@user.id) %>
   <% end %>
 </div>
+
+<%= render "public/stories/index", stories: @stories %>
+
+<% if user_signed_in? && @user == current_user %>
+  <%= render "public/stories/index", stories: @private_stories %>
+<% end %>

@@ -1,29 +1,47 @@
-admin homes#top
-<div>
-<% if admin_signed_in? %>
-  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-<% end %>
-<%= link_to "公開チャットルーム", public_messages_path %>
-<%= link_to "ストーリージャンル一覧", admin_genres_path %>
-<%= link_to "ユーザー一覧", admin_users_path %>
-<%= link_to "コメント一覧", admin_comments_path %>
-<%= link_to "投書一覧", admin_suggestions_path %>
-</div>
+<h2>管理者用トップページ</h2>
+<table class="table table-inverse white">
+  <tr>
+    <td colspan="2"><%= link_to "公開チャットルーム", public_messages_path %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><%= link_to "ストーリージャンル一覧", admin_genres_path %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><%= link_to "コメント一覧", admin_comments_path %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><%= link_to "投書一覧", admin_suggestions_path %></td>
+  </tr>
+  <tr>
+    <td><%= link_to "ストーリー一覧", public_stories_path %></td>
+    <td><%= link_to "制限中のストーリー一覧", admin_stories_path %></td>
+  </tr>
+  <tr>
+    <td><%= link_to "ユーザー一覧", public_users_path %></td>
+    <td><%= link_to "退会済みのユーザー一覧", admin_users_path %></td>
+  </tr>
+  <tr>
+    <td><%= link_to "グループ一覧", public_groups_path %></td>
+    <td><%= link_to "閉鎖中のグループ一覧", admin_groups_path %></td>
+  </tr>
+</table>
 
-      <h2>7日分の投稿数</h2>
-      <table border="1" cellspacing="0">
-        <tr>
-          <% for num in 1..6 do %>
-            <% i=7-num %>
-            <th scope="col" width="50"><%= i.to_s+"日前" %></th>
-          <% end %>
-          <th scope="col" width="50">今日</th>
-        </tr>
-        <tr>
-          <% for num in 1..6 do %>
-            <% i=7-num %>
-            <td><%= Story.created_days_ago(i).count %></td>
-          <% end %>
-          <td><%= Story.created_today.count %></td>
-        </tr>
-      </table>
+<div>
+  <h5>7日分の投稿数</h5>
+  <table border="1" cellspacing="0">
+    <tr>
+      <% for num in 1..6 do %>
+        <% i=7-num %>
+        <th scope="col" width="50"><%= i.to_s+"日前" %></th>
+      <% end %>
+      <th scope="col" width="50">今日</th>
+    </tr>
+    <tr>
+      <% for num in 1..6 do %>
+        <% i=7-num %>
+        <td><%= Story.created_days_ago(i).count %></td>
+      <% end %>
+      <td><%= Story.created_today.count %></td>
+    </tr>
+  </table>
+</div>

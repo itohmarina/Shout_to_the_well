@@ -1,10 +1,10 @@
 class Admin::StoriesController < ApplicationController
   before_action :authenticate_admin!
-  
+
   def index
-    @story = Story.all.where(is_deleted: true)
+    @stories = Story.all.where(is_deleted: true)
   end
-  
+
   def update
     @story = Story.find(params[:id])
     if @story.is_deleted == false
@@ -15,5 +15,5 @@ class Admin::StoriesController < ApplicationController
       redirect_to request.referer
     end
   end
-  
+
 end

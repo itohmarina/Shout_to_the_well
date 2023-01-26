@@ -1,13 +1,17 @@
 <h2>フォロワー一覧</h2>
 
-<% if @users.present? %>
-  <% @users.each do |user| %>
-    <div>
-      <%= image_tag user.get_user_image %>
-      <%= link_to "#{user.name}", public_user_path(user.id) %>
-    </div>
-  <% end %>
-<% end %>
+<table class="table table-inverse white">
+  <tbody>
+    <% if @users.present? %>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= image_tag user.get_user_image, size:"100x100" %></td>
+          <td><%= link_to "#{user.name}", public_user_path(user.id) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
 <div>
   <% if user_signed_in? && @user == current_user %>
     <%= link_to "マイページに戻る", public_user_path(current_user.id) %>

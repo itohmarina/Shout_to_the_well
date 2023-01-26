@@ -1,7 +1,11 @@
-<div class = "unsubscribe">
-  <h5>本当に退会しますか？</h5>
-  <div>
-    <%= link_to "退会する", public_users_withdraw_path, method: :patch %>
-    <%= link_to "マイページに戻る", public_user_path(current_user.id) %>
+<div class='container'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h5>本当に退会しますか？</h5>
+      <div>
+        <%= link_to "退会する", "/public/withdraw", method: :patch, class: "btn btn-danger" %>
+        <%= link_to "マイページに戻る", public_user_path(current_user.id), class: "btn btn-primary" %>
+      </div>
+    </div>
   </div>
 </div>

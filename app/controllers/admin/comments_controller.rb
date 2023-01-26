@@ -2,13 +2,14 @@ class Admin::CommentsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @comments=Comment.all
-    @comment=Comment.new
+    @comments = Comment.all
+    @comment = Comment.new
   end
 
   def create
-    @comment=Comment.new(comment_params)
-    if @comment.save
+    @comment = Comment.new(comment_params)
+    if @comment.save!
+      @comment = Comment.new
       redirect_to admin_comments_path
     else
       render "admin/comments/index"
@@ -25,6 +26,7 @@ class Admin::CommentsController < ApplicationController
     else
       @comment.update(is_deleted: false)
     end
+    @comment = Comment.new
     redirect_to admin_comments_path
   end
 

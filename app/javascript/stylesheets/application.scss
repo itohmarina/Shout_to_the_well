@@ -58,13 +58,23 @@ a{
   text-align: center;
 }
 
-.unsubscribe > div{
-  margin: 50px auto;
-}
 
+//公開チャットルーム
 .public-message-form{
   width: 500px;
   margin-top: 50px;
+}
+
+.public-messages{
+  margin: 5px ;
+}
+
+table .td-wrap {
+  word-break : break-all;
+}
+
+table .td-nowrap{
+  white-space: nowrap;
 }
 
 .container {
@@ -79,18 +89,19 @@ a{
 
 .deeppink {
   color: #ff1493;
+  text-align: center;
+  padding: 50px 0;
 }
 
-.public-messages{
-  margin: 5px ;
-}
 
-.story-title{
+.story-title, .story-summary{
   margin: 20px;
+  word-break : break-all;
 }
 
 .story-body{
   margin: 30px 0;
+  word-break : break-all;
 }
 
 .story-comment{

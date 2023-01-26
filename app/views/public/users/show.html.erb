@@ -33,7 +33,8 @@
       <div class="deeppink user-item">
         <% if @group_users.present? %>
           <% @group_users.each do |group_user| %>
-            <i class="far fa-envelope"></i><%= group_user.group.name %>へ招待されています。
+            <i class="far fa-envelope"></i><%= group_user.group.name %>へ<br>
+            招待されています。
             <%= link_to "参加する", public_group_group_users_accept_path(group_user.group_id), method: :patch, class:"btn btn-outline-warning" %>
           <% end %>
         <% end %>

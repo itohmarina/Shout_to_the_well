@@ -1,12 +1,20 @@
 <% if group.users.include?(current_user) %>
 	<h5>チャットコーナー</h5>
+	<div>
+    <%= form_with model:[:public, group, group_message], method: :post do |f| %>
+      <%= f.text_area :body, placeholder:"メッセージを入れてください(200文字以内)", class: "input-text", cols:"50", rows:"2" %>
+      <p class = "counter">0文字</p>
+      <%= f.submit "投稿",class:"btn btn-primary" %>
+    <% end %>
+  </div>
 	<table class="white">
     <% if group_messages.present? %>
       <% group_messages.each do |group_message| %>
         <tr>
           <td><%= group_message.created_at.strftime('%Y/%m/%d') %></td>
-          <td><%= group_message.user.name %>:<%= group_message.body %></td>
-          <td>
+          <td><%= group_message.user.name %>:</td>
+          <td class="td-wrap"><%= group_message.body %></td>
+          <td class="td-nowrap">
             <% if current_user.id == group_message.group.owner_id %>
               <%= link_to '削除', public_group_group_message_path(group.id, group_message.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline-danger" %>
             <% end %>
@@ -15,13 +23,6 @@
       <% end %>
     <% end %>
   </table>
-  <div>
-    <%= form_with model:[:public, group, group_message], method: :post do |f| %>
-      <%= f.text_area :body, placeholder:"メッセージを入れてください(200文字以内)", class: "input-text", cols:"50", rows:"2" %>
-      <p class = "counter">0文字</p>
-      <%= f.submit "投稿",class:"btn btn-primary" %>
-    <% end %>
-  </div>
 <% else %>
   <h5>チャットはグループメンバーのみ閲覧できます</h5>
 <% end %>

@@ -3,13 +3,19 @@
   内容を確認してください。
   投書の内容は以下でよろしいでしょうか？
 </div>
-<div>
+<div class="white">
   <%= form_with model: @suggestion, url: public_suggestions_path, method: :post do |f| %>
-    <%= @suggestion.title %>
-    <%= f.hidden_field :title, value: @suggestion.title %><br>
-    <%= @suggestion.body %>
-    <%= f.hidden_field :body, value: @suggestion.body %><br>
-    <%= f.submit "修正する", name: :back, class: "btn btn-info" %>
-    <%= f.submit "投書する", class: "btn btn-primary" %>
+    <div>
+      <h5><%= @suggestion.title %></h5>
+      <%= f.hidden_field :title, value: @suggestion.title %>
+    </div>
+    <div>
+      <%= safe_join(@suggestion.body.split("\n"),tag(:br)) %>
+      <%= f.hidden_field :body, value: @suggestion.body %>
+    </div>
+    <div>
+      <%= f.submit "修正する", name: :back, class: "btn btn-info" %>
+      <%= f.submit "投書する", class: "btn btn-primary" %>
+    </div>
   <% end %>
 </div>

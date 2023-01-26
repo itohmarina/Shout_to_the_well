@@ -2,7 +2,7 @@ class Public::PublicMessagesController < ApplicationController
   before_action :authenticate_user!, except:[:index]
 
   def index
-    @public_messages = PublicMessage.page(params[:page])
+    @public_messages = PublicMessage.order(id: "DESC").page(params[:page])
     @public_message = PublicMessage.new
   end
 

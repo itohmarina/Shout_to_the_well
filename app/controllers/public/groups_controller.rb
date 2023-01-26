@@ -20,21 +20,21 @@ class Public::GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @users = @group.users
-    @group_messages = GroupMessage.where(group_id: @group.id)
+    @group_messages = GroupMessage.where(group_id: @group.id).order(id: "DESC").page(params[:page])
     @group_message = GroupMessage.new
   end
 
   def index
-    @groups = Group.all
+    @groups = Group.where(is_deleted: false).order(id: "DESC").page(params[:page])
   end
 
 
   def edit
-    @group = Group.find(@params[:id])
+    @group = Group.find(params[:id])
   end
 
   def update
-    @group = Group.find(@params[:id])
+    @group = Group.find(params[:id])
     if @group.update(group_params)
       redirect_to public_group_path(@group.id)
     else

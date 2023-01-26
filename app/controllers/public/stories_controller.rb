@@ -7,14 +7,14 @@ class Public::StoriesController < ApplicationController
       redirect_to request.referer
     end
     @user = User.find(@story.user_id)
-    @story_comments = @story.story_comments.page(params[:page])
+    @story_comments = @story.story_comments.order(id: "DESC").page(params[:page])
     @comments = Comment.all
     @story_comment = StoryComment.new
   end
 
   def index
     stories = Story.where(is_private: false, is_deleted: false)
-    @stories = stories.select('stories.*', 'count(favorites.id) AS favs').left_joins(:favorites).group('stories.id').order('favs desc')
+    @stories = stories.select('stories.*', 'count(favorites.id) AS favs').left_joins(:favorites).group('stories.id').order('favs desc').page(params[:page])
   end
 
   def new

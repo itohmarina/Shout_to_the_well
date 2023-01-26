@@ -1,6 +1,8 @@
 <h2>グループ一覧</h2>
 <% if admin_signed_in? %>
-  <%= link_to '閉鎖中のグループ一覧はこちら', admin_groups_path %>
+  <div>
+    <%= link_to '閉鎖中のグループ一覧はこちら', admin_groups_path %>
+  </div>
 <% end %>
 <table class="table table-inverse white">
   <tbody>
@@ -13,3 +15,4 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @groups %>

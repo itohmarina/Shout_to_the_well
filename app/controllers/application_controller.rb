@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, :for_search, if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :for_search
 
 
   def after_sign_in_path_for(resource_or_scope)
@@ -29,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def for_search
-    @genres=Genre.all
+    @genres = Genre.all
   end
 
 end

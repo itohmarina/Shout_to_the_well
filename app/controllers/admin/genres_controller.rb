@@ -2,13 +2,15 @@ class Admin::GenresController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-    @genres=Genre.all
+    @genres = Genre.all
+    @genre = Genre.new
   end
 
   def create
-    @genre=Genre.new(genre_params)
+    @genre = Genre.new(genre_params)
     @genre.save
-    redirect_to genres_path
+    @genre = Genre.new
+    redirect_to admin_genres_path
   end
 
   def update
@@ -16,10 +18,12 @@ class Admin::GenresController < ApplicationController
 
     if @genre.is_deleted == false
       @genre.update(is_deleted: true)
-      redirect_to genres_path
+      @genre = Genre.new
+      redirect_to admin_genres_path
     else
       @genre.update(is_deleted: false)
-      redirect_to genres_path
+      @genre = Genre.new
+      redirect_to admin_genres_path
     end
   end
 

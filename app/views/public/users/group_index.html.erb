@@ -1,16 +1,23 @@
 <h2>参加しているグループ一覧</h2>
-<div>
-  <%= link_to "グループを作成する", new_public_group_path %>
-</div>
-
-<% if @group_users.present? %>
-  <% @group_users.each do |group_user| %>
-    <div>
-      <%= image_tag group_user.group.get_group_image %>
-      <%= link_to group_user.group.name, public_group_path(group_user.group_id)%><br>
-      <%= group_user.group.introduction %>
-    </div>
-  <% end %>
-<% else %>
-  <div><h5>現在、参加しているグループはありません</h5></div>
+<% if user_signed_in? %>
+  <div>
+    <%= link_to "グループを作成する", new_public_group_path %>
+  </div>
 <% end %>
+<table class="table table-inverse white">
+  <tbody>
+    <% if @group_users.present? %>
+      <% @group_users.each do |group_user| %>
+        <tr>
+          <td><%= image_tag group_user.group.get_group_image %></td>
+          <td><%= link_to group_user.group.name, public_group_path(group_user.group_id)%></td>
+          <td><%= group_user.group.introduction %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <div>
+        <h5>現在、参加しているグループはありません</h5>
+      </div>
+    <% end %>
+  </tbody>
+</table>

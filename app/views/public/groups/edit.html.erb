@@ -1,9 +1,6 @@
 <div class='container'>
   <div class='row'>
-    <div class='col-md-3'>
-      <%= render 'public/users/info', user: @user %>
-    </div>
-    <div class='col-md-8 offset-md-1'>
+    <div class='col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto'>
   		<h2>Group infomation</h2>
   		<%= form_with model: @group, url: public_group_path, method: :patch do |f| %>
   		  <%= render 'layouts/errors', obj: @group %>
@@ -21,15 +18,18 @@
   		  </div>
       <% end %>
       <div>
-        <% if current_user.id == group_message.group.owner_id %>
+        <% if current_user.id == @group.owner_id %>
           <%= link_to "グループを削除する", public_groups_close_path, method: :patch, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
         <% end %>
       </div>
-    </div>
-    <div>
-      使用方法
-      グループページの「招待する」ボタンから、ほかのユーザーをグループに招待することができます。
-      相手が招待を受諾すると、グループ内で会話することができるようになります。
+      <div>
+      使用方法<br>
+      グループページの「招待する」ボタンから、<br>
+      ほかのユーザーをグループに招待することが<br>
+      できます。相手が招待を受諾すると、<br>
+      グループ内で会話することができるように<br>
+      なります。
+      </div>
     </div>
   </div>
 </div>

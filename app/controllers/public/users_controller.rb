@@ -7,13 +7,13 @@ class Public::UsersController < ApplicationController
   end
 
   def index
-    @users=User.where(is_deleted: false)
+    @users=User.where(is_deleted: false).order(id: "DESC").page(params[:page])
   end
 
   def story_index
     @user = User.find(params[:id])
-    @stories = @user.stories.where(is_private: false)
-    @private_stories = @user.stories.where(is_private: true)
+    @stories = @user.stories.where(is_private: false).page(params[:page])
+    @private_stories = @user.stories.where(is_private: true).page(params[:page])
   end
 
   def edit

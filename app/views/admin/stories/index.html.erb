@@ -2,8 +2,8 @@
 <%= link_to '有効なストーリー一覧はこちら', public_stories_path %>
 <table class="table table-inverse white">
   <tbody>
-    <% if @storys.present? %>
-      <% @storys.each do |story| %>
+    <% if @stories.present? %>
+      <% @stories.each do |story| %>
         <tr>
           <td>
             <%= link_to "#{story.title}", public_story_path(story.id) %>

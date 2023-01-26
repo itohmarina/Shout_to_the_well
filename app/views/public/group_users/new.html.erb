@@ -3,17 +3,22 @@
 
 <% if @users.present? %>
   <% @users.each do |user| %>
-    <%= image_tag user.get_user_image, size: "100x100" %>
-    <%= user.name %>
-      <% if user.requested?(@group) %>
-        <% if user.joining?(@group.id) %>
-          <h6>参加中です</h6>
+    <table>
+      <tr>
+        <td><%= image_tag user.get_user_image, size: "100x100" %></td>
+        <td><%= user.name %></td>
+        <% if user.requested?(@group) %>
+          <% if user.joining?(@group.id) %>
+            <td>参加中です</td>
+          <% else %>
+            <td>招待中です</td>
+          <% end %>
         <% else %>
-          <h6>招待中です</h6>
+          <td>
+            <%= link_to "招待する", public_group_group_users_path(@group.id, invited_id: user.id), method: :post %>
+          </td>
         <% end %>
-      <% else %>
-        <%= link_to "招待する", public_group_group_users_path(@group.id, invited_id: user.id), method: :post %>
-      <% end %>
-
+      </tr>
+    </ta>
   <% end %>
 <% end %>

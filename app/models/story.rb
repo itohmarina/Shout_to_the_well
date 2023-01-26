@@ -2,7 +2,7 @@ class Story < ApplicationRecord
 
   validates :title, length: { in: 1..50 }
   validates :body, length: { in: 1..2000 }
-  validates :summary, length: { maximum: 100 }
+  validates :summary, length: { in: 1..100 }
 
   belongs_to :user
   belongs_to :genre

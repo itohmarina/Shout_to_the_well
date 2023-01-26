@@ -1,22 +1,6 @@
 <h2>ここは公開チャットコーナーです</h2>
 <h6>公序良俗に違反するような内容があった場合、予告なく管理者がメッセージを削除したり、違反したユーザーを退会させる場合があります。</h6>
 
-<table class="white">
-  <% if @public_messages.present? %>
-    <% @public_messages.each do |public_message| %>
-      <tr>
-        <td><%= public_message.created_at.strftime('%Y/%m/%d') %></td>
-        <td><%= public_message.user.name %>:</td><td><%= public_message.body %></td>
-        <td>
-          <% if current_user == public_message.user || admin_signed_in? %>
-            <span><%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></span>
-          <% end %>
-        </td>
-    <% end %>
-  <% end %>
-</table>
-<%= paginate @public_messages %>
-
 <% if user_signed_in? %>
   <%= render "public/public_messages/form", public_message: @public_message %>
 <% else %>
@@ -24,3 +8,22 @@
     <h5>ログインすると、コメントできます。</h5>
   </div>
 <% end %>
+
+<table class="white">
+  <% if @public_messages.present? %>
+    <% @public_messages.each do |public_message| %>
+      <tr>
+        <td><%= public_message.created_at.strftime('%Y/%m/%d') %></td>
+        <td><%= public_message.user.name %>:</td>
+        <td class="td-wrap"><%= public_message.body %></td>
+        <td class="td-nowrap">
+          <% if user_signed_in? || admin_signed_in? %>
+            <% if current_user.id == public_message.user_id || admin_signed_in? %>
+              <%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%>
+            <% end %>
+          <% end %>
+        </td>
+    <% end %>
+  <% end %>
+</table>
+<%= paginate @public_messages %>

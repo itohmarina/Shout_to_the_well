@@ -7,6 +7,7 @@ class Public::SuggestionsController < ApplicationController
 
   def confirm
     @suggestion = Suggestion.new(suggestion_params)
+    @suggestion.user_id =current_user.id
     if @suggestion.invalid?
       render "public/suggestions/new"
     end
@@ -14,7 +15,7 @@ class Public::SuggestionsController < ApplicationController
 
   def create
     @suggestion = Suggestion.new(suggestion_params)
-    @suggestion.user_id = current_user.id
+    @suggestion.user_id =current_user.id
     if params[:back] || !@suggestion.save
       render "public/suggestions/new"
     else
@@ -30,7 +31,7 @@ private
 
 
 def suggestion_params
-  params.require(:suggestion).permit(:title, :body)
+  params.require(:suggestion).permit(:title, :body,)
 end
 
 

@@ -1,6 +1,6 @@
 <div class='container'>
   <div class='row'>
-    
+
     <div class='col-md-3 white'>
       <%= render 'public/users/info', user:@user %>
       <div>
@@ -11,8 +11,11 @@
   		<div class="story-title">
   		  <h2><%= @story.title %></h2>
       </div>
+      <div class="story-summary">
+        <%= safe_join(@story.summary.split("\n"),tag(:br))%>
+      </div>
       <div class="story-body">
-        <%= @story.body %>
+        <%= safe_join(@story.body.split("\n"),tag(:br))%>
       </div>
       <div>
         <% if @story.user == current_user %>

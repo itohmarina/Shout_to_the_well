@@ -2,14 +2,14 @@
 <% if admin_signed_in? %>
   <%= link_to '退会済みのユーザー一覧はこちら', admin_users_path %>
 <% end %>
-<table class='table'>
+<table class='table table-inverse white'>
   <% if @users.present? %>
     <% @users.each do |user| %>
     <tr>
       <td><%= link_to user.name, public_user_path(user.id) %></td>
-      <td><%= user.introduction </td>
+      <td><%= user.introduction %></td>
     </tr>
     <% end %>
   <% end %>
 </table>
-<%= link_to "トップへ戻る", root_path %>
+<%= paginate @users %>
