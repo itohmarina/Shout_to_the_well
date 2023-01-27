@@ -4,7 +4,7 @@
   <h2><%= @word %>を含むストーリー一覧</h2>
   <% if @genre.present? %>
     <div>
-      <h5>ジャンル名:<%= @genre %>を表示しています</h5>
+      <h5>ジャンル名:<%= @genre.name %>を表示しています</h5>
     </div>
   <% end %>
 <% else %>

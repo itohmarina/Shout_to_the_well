@@ -3,13 +3,13 @@ class Public::SearchesController < ApplicationController
   #検索結果を表示
   def search
     @range = params[:range]
-    @genre = params[:genre]
+    @genre = Genre.find(params[:genre])
     @word = params[:word]
-    
+
     if @range == "Story"
       @stories = Story.looks(params[:search], params[:word]).order(id: "DESC")
       if @genre.present?
-        @stories = @stories.where(genre_id: @genre.to_i).order(id: "DESC")
+        @stories = @stories.where(genre_id: @genre.id).order(id: "DESC")
       end
     elsif @range == "User"
       @users = User.looks(params[:search], params[:word]).order(id: "DESC")
