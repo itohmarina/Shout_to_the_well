@@ -28,7 +28,7 @@
 でも、もやもやした気持ちを全部我慢していたら、そのうち自分がパンクしてしまう。それなら、悪口が返ってこないところに投稿しよう。文章を考えながら、自分の気持ちも整理しよう。
 
 ## 設計書
-ER図は[こちら](https://drive.google.com/file/d/1B2fnd8j50P8W__zK-6E4AgGaPnUzcHa8/view?usp=sharing)
+ER図は[こちら](https://drive.google.com/file/d/1jBjoOTlZo8bTkGwKLtH6d1pZGyyoOoWk/view)
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -38,5 +38,5 @@ ER図は[こちら](https://drive.google.com/file/d/1B2fnd8j50P8W__zK-6E4AgGaPnU
 - IDE：Cloud9
 
 ## 使用素材
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
-- 使用しない場合は、使用素材の項目をREADMEから削除してください。
+- 背景画像: Shinica 様(イラストAC), URLは[こちら](https://www.ac-illust.com/main/detail.php?id=23383681)
+- ページリンクのモノクロアイコン: シルエットAC, URLは[こちら](https://www.silhouette-ac.com/)

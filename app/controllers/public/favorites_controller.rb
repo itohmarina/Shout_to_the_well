@@ -1,9 +1,9 @@
 class Public::FavoritesController < ApplicationController
   before_action :authenticate, except:[:show]
-  
+
   def show
     @user=User.find(params[:id])
-    @stories=@user.favorite_stories.page(params[:page])
+    @stories=@user.favorite_stories.where(is_deleted: false, is_private: false).page(params[:page])
   end
 
   def create
@@ -20,12 +20,12 @@ class Public::FavoritesController < ApplicationController
 
 
   private
-  
+
   def authenticate
     unless user_signed_in?
       flash[:notice] = "ログインすると、「いいね」できます"
       redirect_to request.referer
     end
-  end 
+  end
 
 end
