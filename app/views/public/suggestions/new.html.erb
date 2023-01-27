@@ -1,24 +1,30 @@
-<h2>投書箱</h2>
-<div>
-  ひごろ『古井戸に叫べ』をご利用いただきまして、誠にありがとうございます。
-  ここは、管理者に向けて投書するコーナーです。
-  ご利用する上で、ご要望や困ったこと等ありましたら、下記フォームにて何なりとお寄せください。
-</div>
-<div>
-  <%= form_with model:[:public, @suggestion], url: public_suggestions_confirm_path, method: :get do |f| %>
-    <%= render 'layouts/errors', obj: @suggestion %>
-    <div class="form-group">
-      <%= f.label :title, "タイトル(50文字以内)" %><br>
-      <%= f.text_area :title, placeholder:"タイトルを入れてください", class: "title-text", cols:"50", rows:"1" %>
-      <p class = "title-counter">0文字</p>
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto'>
+      <h2>投書箱</h2>
+      <div>
+        ひごろ『古井戸に叫べ』をご利用いただきまして、誠にありがとうございます。
+        ここは、管理者に向けて投書するコーナーです。
+        ご利用する上で、ご要望や困ったこと等ありましたら、下記フォームにて何なりとお寄せください。
+      </div>
+      <div>
+        <%= form_with model:[:public, @suggestion], url: public_suggestions_confirm_path, method: :get do |f| %>
+          <%= render 'layouts/errors', obj: @suggestion %>
+          <div class="form-group">
+            <%= f.label :title, "タイトル(50文字以内)" %><br>
+            <%= f.text_area :title, placeholder:"タイトルを入れてください", class: "title-text", cols:"50", rows:"1" %>
+            <p class = "title-counter">0文字</p>
+          </div>
+          <div class="form-group">
+            <%= f.label :body, "本文(1200文字以内)" %><br>
+            <%= f.text_area :body, placeholder:"本文を入れてください", id: "suggestion-text", cols:"50", rows:"10" %>
+            <p id = "suggestion-counter">0文字</p>
+          </div>
+          <div class="form-group">
+            <%= f.submit "投稿",class:"btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label :body, "本文(1200文字以内)" %><br>
-      <%= f.text_area :body, placeholder:"本文を入れてください", id: "suggestion-text", cols:"50", rows:"10" %>
-      <p id = "suggestion-counter">0文字</p>
-    </div>
-    <div class="form-group">
-      <%= f.submit "投稿",class:"btn btn-primary" %>
-    </div>
-  <% end %>
+  </div>
 </div>
