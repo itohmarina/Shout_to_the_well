@@ -11,15 +11,16 @@
   <h2><%= @word %>を含むグループ一覧</h2>
 <% end %>
 
-<table class="table table-hover table-inverse">
+<table class="table table-hover table-inverse white">
   <!--検索対象モデルがUserの時 -->
   <% if @range == "User" %>
     <tbody>
       <% if @users.present? %>
-        <h6>新規登録順</h6>
+        <h5>新規登録順</h5>
         <% @users.each do |user| %>
           <tr>
-            <td><%= user.name %></td>
+            <td><%= image_tag user.get_user_image, size:'100x100' %></td>
+            <td><%= link_to user.name, public_user_path(user.id) %></td>
             <td><%= user.introduction %></td>
           </tr>
         <% end %>
@@ -29,10 +30,10 @@
     <!--検索対象モデルがStoryの時) -->
     <tbody>
       <% if @stories.present? %>
-        <h6>新規投稿順</h6>
+        <h5>新規投稿順</h5>
         <% @stories.each do |story| %>
           <tr>
-            <td><%= story.title %></td>
+            <td><%= link_to story.title, public_story_path(story.id) %></td>
             <td><%= story.summary %></td>
           </tr>
         <% end %>
@@ -42,10 +43,11 @@
     <!--検索対象モデルがGroupの時-->
     <tbody>
       <% if @groups.present? %>
-        <h6>新規作成順</h6>
+        <h5>新規作成順</h5>
         <% @groups.each do |group| %>
           <tr>
-            <td><%= group.name %></td>
+            <td><%= image_tag group.get_group_image, size:'100x100' %></td>
+            <td><%= link_to group.name, public_group_path(group.id) %></td>
             <td><%= group.introduction %></td>
           </tr>
         <% end %>

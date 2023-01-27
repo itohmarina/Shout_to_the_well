@@ -1,5 +1,5 @@
 /* global $*/
-$(function(){
+$(document).on('turbolinks:load', function(){
   $(".input-text").on("input", function() {
     let countNum = String($(this).val().length);
     $(".counter").text(countNum + "文字");
@@ -12,7 +12,7 @@ $(function(){
   });
 });
 
-$(function(){
+$(document).on('turbolinks:load', function(){
   $(".title-text").on("input", function() {
     let countNum = String($(this).val().length);
     $(".title-counter").text(countNum + "文字");
@@ -25,7 +25,7 @@ $(function(){
   });
 });
 
-$(function(){
+$(document).on('turbolinks:load', function(){
   $(".summary-text").on("input", function() {
     let countNum = String($(this).val().length);
     $(".summary-counter").text(countNum + "文字");
@@ -38,7 +38,7 @@ $(function(){
   });
 });
 
-$(function(){
+$(document).on('turbolinks:load', function(){
   $(".story-text").on("input", function() {
     let countNum = String($(this).val().length);
     $(".story-counter").text(countNum + "文字");
@@ -51,7 +51,7 @@ $(function(){
   });
 });
 
-$(function(){
+$(document).on('turbolinks:load', function(){
   $("#suggestion-text").on("input", function() {
     let countNum = String($(this).val().length);
     $("#suggestion-counter").text(countNum + "文字");

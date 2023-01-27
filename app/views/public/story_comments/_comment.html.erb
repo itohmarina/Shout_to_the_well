@@ -1,4 +1,18 @@
-<div>コメント数:<%= story_comments.count %></div>
+<div>コメント数:<%= story.story_comments.count %></div>
+
+<div class="comment-form">
+  <h6>送りたいコメントを選んでください</h6>
+  <%= form_with model:[:public, story, story_comment], method: :post do |f| %>
+    <% comments.each do |comment| %>
+      <div>
+        <%= f.radio_button :comment_id, comment.id %>
+        <%= f.label :comment_id, comment.body %>
+      </div>
+    <% end %>
+    <%= f.submit "送信", class:"btn btn-primary" %>
+  <% end %>
+</div>
+
 <% if story_comments.present? %>
   <% story_comments.each do |story_comment| %>
     <div>
@@ -13,15 +27,3 @@
   <% end %>
 <% end %>
 <%= paginate story_comments %>
-<div class="comment-form">
-  <h6>送りたいコメントを選んでください</h6>
-  <%= form_with model:[:public, story, story_comment], method: :post do |f| %>
-    <% comments.each do |comment| %>
-      <div>
-        <%= f.radio_button :comment_id, comment.id %>
-        <%= f.label :comment_id, comment.body %>
-      </div>
-    <% end %>
-    <%= f.submit "送信", class:"btn btn-primary" %>
-  <% end %>
-</div>

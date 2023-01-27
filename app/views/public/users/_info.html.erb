@@ -7,7 +7,7 @@
   </tr>
   <tr>
     <% if user.introduction.present? %>
-      <td colspan="2"><%= user.introduction %></td>
+      <td colspan="2"><%= safe_join(user.introduction.split("\n"),tag(:br)) %></td>
     <% end %>
   </tr>
   <% if user_signed_in? %>
@@ -23,7 +23,7 @@
     <tr>
       <% if user != current_user %>
         <% if current_user.following?(@user) %>
-          <th colspan="2"><%= link_to "フォローを外す", public_user_relationships_path(@user.id), method: :delete, class: "btn btn-success" %></th>
+          <th colspan="2"><%= link_to "フォローを外す", public_user_relationships_path(@user.id), method: :delete, class: "btn btn-outline-info" %></th>
         <% else %>
           <th colspan="2"><%= link_to "フォローする", public_user_relationships_path(@user.id), method: :post, class: "btn btn-outline-success" %></th>
         <% end %>

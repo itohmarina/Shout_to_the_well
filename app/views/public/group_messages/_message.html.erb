@@ -11,11 +11,11 @@
     <% if group_messages.present? %>
       <% group_messages.each do |group_message| %>
         <tr>
-          <td><%= group_message.created_at.strftime('%Y/%m/%d') %></td>
-          <td><%= group_message.user.name %>:</td>
+          <td class="td-nowrap"><%= group_message.created_at.strftime('%Y/%m/%d') %></td>
+          <td class="td-nowrap"><%= group_message.user.name %>:</td>
           <td class="td-wrap"><%= group_message.body %></td>
           <td class="td-nowrap">
-            <% if current_user.id == group_message.group.owner_id %>
+            <% if current_user.id == group_message.group.owner_id || current_user.id == group_message.user_id %>
               <%= link_to '削除', public_group_group_message_path(group.id, group_message.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline-danger" %>
             <% end %>
           </td>

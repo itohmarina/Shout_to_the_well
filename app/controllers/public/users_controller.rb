@@ -12,8 +12,8 @@ class Public::UsersController < ApplicationController
 
   def story_index
     @user = User.find(params[:id])
-    @stories = @user.stories.where(is_private: false).page(params[:page])
-    @private_stories = @user.stories.where(is_private: true).page(params[:page])
+    @stories = @user.stories.where(is_private: false, is_deleted: false).page(params[:page])
+    @private_stories = @user.stories.where(is_private: true, is_deleted: false).page(params[:page])
   end
 
   def edit
@@ -38,7 +38,7 @@ class Public::UsersController < ApplicationController
 
     if @user.update(is_deleted: true)
       reset_session
-      redirect_to root_path, method: :delete, notice:"退会しました。ご利用、ありがとうございました。"
+      redirect_to root_path, method: :delete, notice: "退会しました。ご利用、ありがとうございました。"
     else
       render 'public/users/show'
     end
@@ -46,7 +46,7 @@ class Public::UsersController < ApplicationController
 
   def group_index
     @user = User.find(params[:id])
-    @group_users = GroupUser.where(user_id: @user.id)
+    @groups = @user.groups.where(is_deleted: false)
   end
 
 

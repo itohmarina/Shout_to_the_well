@@ -1,5 +1,6 @@
 <h2>ここは公開チャットコーナーです</h2>
 <h6>公序良俗に違反するような内容があった場合、予告なく管理者がメッセージを削除したり、違反したユーザーを退会させる場合があります。</h6>
+<%= link_to "トップページに戻る", root_path %>
 
 <% if user_signed_in? %>
   <%= render "public/public_messages/form", public_message: @public_message %>
@@ -9,6 +10,7 @@
   </div>
 <% end %>
 
+
 <table class="white">
   <% if @public_messages.present? %>
     <% @public_messages.each do |public_message| %>
@@ -17,10 +19,11 @@
         <td><%= public_message.user.name %>:</td>
         <td class="td-wrap"><%= public_message.body %></td>
         <td class="td-nowrap">
-          <% if user_signed_in? || admin_signed_in? %>
-            <% if current_user.id == public_message.user_id || admin_signed_in? %>
-              <%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%>
-            <% end %>
+          <% if user_signed_in? && current_user.id == public_message.user_id %>
+            <%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%>
+          <% end %>
+          <% if admin_signed_in? %>
+            <%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%>
           <% end %>
         </td>
     <% end %>

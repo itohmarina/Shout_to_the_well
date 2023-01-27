@@ -6,12 +6,12 @@
 <% end %>
 <table class="table table-inverse white">
   <tbody>
-    <% if @group_users.present? %>
-      <% @group_users.each do |group_user| %>
+    <% if @groups.present? %>
+      <% @groups.each do |group| %>
         <tr>
-          <td><%= image_tag group_user.group.get_group_image %></td>
-          <td><%= link_to group_user.group.name, public_group_path(group_user.group_id)%></td>
-          <td><%= group_user.group.introduction %></td>
+          <td><%= image_tag group.get_group_image %></td>
+          <td><%= link_to group.name, public_group_path(group.id)%></td>
+          <td><%= group.introduction %></td>
         </tr>
       <% end %>
     <% else %>

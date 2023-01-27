@@ -4,7 +4,16 @@ class Public::StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
     if @story.is_private == true || @story.is_deleted == true
-      redirect_to request.referer
+      if @story.is_deleted == true
+        unless admin_signed_in?
+          redirect_to request.referer
+        end
+      end 
+      if @story.is_private == true
+        unless user_signed_in? && @story.user_id == current_user.id
+          redirect_to request.referer
+        end 
+      end
     end
     @user = User.find(@story.user_id)
     @story_comments = @story.story_comments.order(id: "DESC").page(params[:page])
