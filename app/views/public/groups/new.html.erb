@@ -1,8 +1,5 @@
 <div class='container'>
   <div class='row'>
-    <div class='col-md-3'>
-      <%= render 'public/users/info', user: @user %>
-    </div>
     <div class='col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto'>
   		<h2>New Group</h2>
   		<%= form_with model: @group, url: public_groups_path, method: :post do |f| %>
@@ -17,16 +14,16 @@
           <p class = "counter">0文字</p>
         </div>
         <div class="form-group">
-  		    <%= f.submit "グループ情報を更新する",class:"btn btn-primary" %>
+  		    <%= f.submit "グループを作成する", class:"btn btn-primary" %>
   		  </div>
       <% end %>
-    </div>
-    <div>
-      使用方法<br>
-      グループを作成すると、ほかのユーザーを<br>
-      グループに招待することができるようになります。<br>
-      相手が招待を受諾すると、グループ内で会話する<br>
-      ことができるようになります。
+      <div>
+        使用方法<br>
+        グループを作成すると、ほかのユーザーを<br>
+        グループに招待することができるようになります。<br>
+        相手が招待を受諾すると、グループ内で会話する<br>
+        ことができるようになります。
+      </div>
     </div>
   </div>
 </div>

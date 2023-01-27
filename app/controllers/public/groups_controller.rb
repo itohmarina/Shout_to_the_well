@@ -19,7 +19,7 @@ class Public::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @users = @group.users
+    @users = @group.users(is_deleted: false)
     @group_messages = GroupMessage.where(group_id: @group.id).order(id: "DESC").page(params[:page])
     @group_message = GroupMessage.new
   end
