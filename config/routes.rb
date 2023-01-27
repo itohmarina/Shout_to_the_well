@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     resources :favorites, only:[:create, :destroy, :show]
 
     resources :groups, only:[:show, :index, :new, :create, :update, :edit]
-    patch 'groups/close' => 'groups#close'
+    get 'groups/close/:id' => 'groups#close'
     resources :groups do
       resource :group_users, only:[:new, :create, :destroy]
       patch 'group_users/accept' => 'group_users#accept'

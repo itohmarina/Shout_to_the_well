@@ -4,6 +4,11 @@
     <%= link_to '閉鎖中のグループ一覧はこちら', admin_groups_path %>
   </div>
 <% end %>
+<% if user_signed_in? %>
+  <div>
+    <%= link_to "グループを作成する", new_public_group_path %>
+  </div>
+<% end %>
 <table class="table table-inverse white">
   <tbody>
     <% @groups.each do |group| %>

@@ -10,7 +10,7 @@
   		  </div>
   		  <div class="form-group">
   		    <%= f.label :introduction, "グループ紹介(200文字以内)" %><br>
-  		    <%= f.text_area :introduction, placeholder: "グループ紹介を入れてください", class: "input-text", cols:"50", rows:"2" %><br>
+  		    <%= f.text_area :introduction, placeholder: "グループ紹介を入れてください", class: "input-text", cols: "50", rows: "2" %><br>
           <p class = "counter">0文字</p>
         </div>
         <div class="form-group">
@@ -19,7 +19,7 @@
       <% end %>
       <div>
         <% if current_user.id == @group.owner_id %>
-          <%= link_to "グループを削除する", public_groups_close_path, method: :patch, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
+          <%= link_to "グループを削除する", url_for("/public/groups/close/#{@group.id}"), data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
         <% end %>
       </div>
       <div>

@@ -45,8 +45,7 @@ class Public::GroupsController < ApplicationController
 #グループを削除(無効化)する
   def close
     @group = Group.find(params[:id])
-    @group.is_deleted = true
-    if @group.update
+    if @group.update(is_deleted: true)
       flash[:notice] = "グループが削除されました"
       redirect_to root_path
     else
