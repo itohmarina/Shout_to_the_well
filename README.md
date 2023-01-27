@@ -38,5 +38,6 @@ ER図は[こちら](https://drive.google.com/file/d/1jBjoOTlZo8bTkGwKLtH6d1pZGyy
 - IDE：Cloud9
 
 ## 使用素材
+- ホームアイコン: Canva 様, URLは[こちら](https://www.canva.com/)
 - 背景画像: Shinica 様(イラストAC), URLは[こちら](https://www.ac-illust.com/main/detail.php?id=23383681)
-- ページリンクのモノクロアイコン: シルエットAC, URLは[こちら](https://www.silhouette-ac.com/)
+- ページリンクのモノクロアイコン: シルエットAC 様, URLは[こちら](https://www.silhouette-ac.com/)
