@@ -10,11 +10,14 @@
         <% if user.requested?(@group) %>
           <% if user.joining?(@group.id) %>
             <td>参加中です</td>
+            <% if current_user.id == @group.owner_id %>
+              <td><%= link_to "グループを退会させる", public_group_group_users_path(@group.id, withdraw_id: user.id), method: :delete %></td>
+            <% end %>
           <% else %>
-            <td>招待中です</td>
+            <td colspan="2">招待中です</td>
           <% end %>
         <% else %>
-          <td>
+          <td colspan="2">
             <%= link_to "招待する", public_group_group_users_path(@group.id, invited_id: user.id), method: :post %>
           </td>
         <% end %>

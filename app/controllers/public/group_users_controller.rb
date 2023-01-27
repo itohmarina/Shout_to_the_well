@@ -14,9 +14,11 @@ class Public::GroupUsersController < ApplicationController
   end
 
   def destroy
-    current_user.leave_group(params[:group_id])
+    user = User.find(params[:withdraw_id])
+    group = Group.find(params[:group_id])
+    user.leave_group(group.id)
     flash[:notice] = "グループを退会しました"
-    redirect_to public_user_path(current_user.id)
+    redirect_to public_group_path(group.id)
   end
 
   #グループ参加リクエストを受け付ける
