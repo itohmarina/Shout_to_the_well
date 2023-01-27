@@ -14,7 +14,7 @@
         <% if admin_signed_in? %>
           <% if user.is_deleted == true %>
             <td>
-              <%= link_to '有効化する', admin_user_path(user.id), method: :patch, data: { confirm: 'ユーザーを有効化しますか？' }, class: "btn btn-sm btn-success"%>
+              <%= link_to '有効化する', admin_user_path(user.id), method: :patch, data: { confirm: 'ユーザーを有効化しますか？' }, class: "btn btn-sm btn-outline-success"%>
             </td>
           <% else %>
             <td></td>
