@@ -11,22 +11,4 @@
 <% end %>
 
 
-<table class="white">
-  <% if @public_messages.present? %>
-    <% @public_messages.each do |public_message| %>
-      <tr>
-        <td><%= public_message.created_at.strftime('%Y/%m/%d') %></td>
-        <td><%= public_message.user.name %>:</td>
-        <td class="td-wrap"><%= public_message.body %></td>
-        <td class="td-nowrap">
-          <% if user_signed_in? && current_user.id == public_message.user_id %>
-            <%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%>
-          <% end %>
-          <% if admin_signed_in? %>
-            <%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%>
-          <% end %>
-        </td>
-    <% end %>
-  <% end %>
-</table>
-<%= paginate @public_messages %>
+<%= render "public/public_messages/messages", public_messages: @public_messages %>
