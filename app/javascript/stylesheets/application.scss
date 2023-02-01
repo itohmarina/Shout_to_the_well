@@ -60,14 +60,49 @@ a{
 
 
 //公開チャットルーム
-.public-message-form{
-  width: 500px;
-  margin-top: 50px;
+.messages_container{
+  width: 100%;
 }
 
-.public-messages{
-  margin: 5px ;
+.message_container{
+  margin-top: 10px;
 }
+
+.message_sub_container{
+  display: flex;
+}
+
+.message_userimage{
+  margin-left: 0;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+.message_username{
+  margin-left: 0;
+  width: 500px;
+  height: 32px;
+}
+
+.message_time{
+  margin-left: 0;
+  width: 200px;
+  height: 32px;
+}
+
+.message_body{
+  margin-left: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  word-break : break-all;
+}
+
+.message_btn{
+  width: 35px;
+  margin-right: 0;
+}
+
 
 table .td-wrap {
   word-break : break-all;

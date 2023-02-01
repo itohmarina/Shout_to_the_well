@@ -1,18 +1,24 @@
-<table class="white">
+<div class = "messages_container">
   <% if public_messages.present? %>
     <% public_messages.each do |public_message| %>
-      <tr>
-        <td><%= public_message.created_at.strftime('%Y/%m/%d') %></td>
-        <td><%= public_message.user.name %>:</td>
-        <td class="td-wrap"><%= public_message.body %></td>
-        <td class="td-nowrap">
-          <% if user_signed_in? && current_user.id == public_message.user_id %>
-            <%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%>
-          <% end %>
-          <% if admin_signed_in? %>
-            <%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%>
-          <% end %>
-        </td>
+      <div class = "message_container">
+        <div class = "message_sub_container">
+          <div class = "message_userimage"><%= image_tag public_message.user.get_user_image, size:"30x30", class:"rounded-circle" %></div>
+          <div class = "message_username"><%= public_message.user.name %></div>
+          <div class = "message_time"><%= public_message.created_at.strftime('%Y/%m/%d %H:%M') %></div>
+        </div>
+        <div class = "message_sub_container">
+          <div class = "message_body"><%= public_message.body %></div>
+          <div class = "message_btn">
+            <% if user_signed_in? && current_user.id == public_message.user_id %>
+              <%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger text-nowrap"%>
+            <% end %>
+            <% if admin_signed_in? %>
+              <%= link_to '削除', public_message_path(public_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger text-nowrap"%>
+            <% end %>
+          </div>
+        </div>
+      </div>
     <% end %>
   <% end %>
 </table>
