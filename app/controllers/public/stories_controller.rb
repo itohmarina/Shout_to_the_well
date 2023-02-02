@@ -34,6 +34,7 @@ class Public::StoriesController < ApplicationController
 
   def create
     @story = Story.new(story_params)
+    @story.score = Language.get_data(story_params[:body])
     @story.user_id = current_user.id
     @user = current_user
     if @story.save!

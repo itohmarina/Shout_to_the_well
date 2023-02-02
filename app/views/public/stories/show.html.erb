@@ -18,6 +18,9 @@
         <%= safe_join(@story.body.split("\n"),tag(:br))%>
       </div>
       <div>
+        <span class="sentiment-score">本文の感情分析スコア<%= @story.score %></span>
+      </div>
+      <div>
         <% if @story.user == current_user %>
           <%= link_to '編集', edit_public_story_path(@story), class: "btn btn-sm btn-success" %>
           <%= link_to '削除', public_story_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
