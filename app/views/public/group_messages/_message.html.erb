@@ -7,22 +7,28 @@
       <%= f.submit "投稿",class:"btn btn-primary" %>
     <% end %>
   </div>
-	<table class="white">
+	<div class="messages_container">
     <% if group_messages.present? %>
       <% group_messages.each do |group_message| %>
-        <tr>
-          <td class="td-nowrap"><%= group_message.created_at.strftime('%Y/%m/%d') %></td>
-          <td class="td-nowrap"><%= group_message.user.name %>:</td>
-          <td class="td-wrap"><%= group_message.body %></td>
-          <td class="td-nowrap">
-            <% if current_user.id == group_message.group.owner_id || current_user.id == group_message.user_id %>
-              <%= link_to '削除', public_group_group_message_path(group.id, group_message.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline-danger" %>
-            <% end %>
-          </td>
-        </tr>
+        <div class = "shadow message_container">
+          <div class = "message_sub_container">
+            <div class = "message_userimage"><%= image_tag group_message.user.get_user_image, size:"30x30", class:"rounded-circle" %></div>
+            <div class = "message_username"><%= group_message.user.name %></div>
+            <div class="message_time"><%= group_message.created_at.strftime('%Y/%m/%d') %></div>
+          </div>
+          <div class = "message_sub_container">
+            <div class="messaage_body"><%= group_message.body %></div>
+            <div class="message_btn">
+              <% if current_user.id == group_message.group.owner_id || current_user.id == group_message.user_id %>
+                <%= link_to '削除', public_group_group_message_path(group.id, group_message.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline-danger text-nowrap" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       <% end %>
     <% end %>
-  </table>
+  </div>
+  <%= paginate group_messages %>
 <% else %>
   <h5>チャットはグループメンバーのみ閲覧できます</h5>
 <% end %>
