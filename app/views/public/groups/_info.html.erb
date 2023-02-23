@@ -15,14 +15,14 @@
   <% if @group.users.include?(current_user) %>
     <tr>
       <td colspan="2">
-        <%= link_to edit_public_group_path, class: "btn btn-outline-secondary btn-block" do %>
+        <%= link_to edit_group_path, class: "btn btn-outline-secondary btn-block" do %>
           <i class="fas fa-user-cog"></i>
         <% end %>
       </td>
     </tr>
     <tr>
       <td colspan="2">
-        <%= link_to "ほかのユーザーを招待する", new_public_group_group_users_path(@group.id) %>
+        <%= link_to "ほかのユーザーを招待する", new_group_group_users_path(@group.id) %>
       </td>
     </tr>
   <% end %>
@@ -33,14 +33,14 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= image_tag user.get_user_image, size: "100x100" %></th>
-      <td><%= link_to "#{user.name}", public_user_path(user.id) %></th>
+      <td><%= link_to "#{user.name}", user_path(user.id) %></th>
     </tr>
   <% end %>
 
   <% if @group.users.include?(current_user) %>
     <% if current_user.id != @group.owner_id %>
       <tr>
-        <td colspan="2"><%= link_to "グループを退会する", public_group_group_users_path(@group.id, withdraw_id: current_user.id), method: :delete %></td>
+        <td colspan="2"><%= link_to "グループを退会する", group_group_users_path(@group.id, withdraw_id: current_user.id), method: :delete %></td>
       </tr>
     <% end %>
   <% end %>

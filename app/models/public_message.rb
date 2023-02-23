@@ -1,6 +1,6 @@
 class PublicMessage < ApplicationRecord
   
-  validates :body, length: { in: 1..200 }
+  validates :body, presence: true, length: { in: 1..200 }
   
   belongs_to :user
   

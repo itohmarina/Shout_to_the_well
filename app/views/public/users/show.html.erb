@@ -5,26 +5,26 @@
     </div>
     <div class='col-md-8 offset-md-1 user-items'>
       <div class="user-item">
-        <%= link_to public_path(@user.id) do %>
+        <%= link_to stories_path(@user.id) do %>
           <div><%= image_tag('books.jpg' ,size:"150x150" ) %></div>
           <span>ストーリー一覧</span>
         <% end %>
       </div>
       <div class="user-item">
-        <%= link_to public_favorite_path(@user.id) do %>
+        <%= link_to favorite_path(@user.id) do %>
           <div><%= image_tag('lily.jpg' ,size:"150x150" ) %></div>
           <span>お気に入りのストーリー一覧</span>
         <% end %>
       </div>
       <div class="user-item">
-        <%= link_to public_users_group_index_path(@user.id) do %>
+        <%= link_to users_group_index_path(@user.id) do %>
           <div><%= image_tag('coffeecup.jpg' ,size:"150x150" ) %></div>
           <span>参加しているグループ一覧</span>
         <% end %>
       </div>
       <% if user_signed_in? && @user == current_user %>
         <div class="user-item">
-          <%= link_to new_public_story_path do %>
+          <%= link_to new_story_path do %>
             <div><%= image_tag('manuscript.jpg' ,size:"150x150" ) %></div>
             <span>ストーリーを投稿する</span>
           <% end %>
@@ -35,11 +35,11 @@
           <% @group_users.each do |group_user| %>
             <i class="far fa-envelope"></i><%= group_user.group.name %>へ<br>
             招待されています。
-            <%= link_to "参加する", public_group_group_users_accept_path(group_user.group_id), method: :patch, class:"btn btn-outline-warning" %>
+            <%= link_to "参加する", group_group_users_accept_path(group_user.group_id), method: :patch, class:"btn btn-outline-warning" %>
           <% end %>
         <% end %>
       </div>
     </div>
   </div>
-  
+
 </div>

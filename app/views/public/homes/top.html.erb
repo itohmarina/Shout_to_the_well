@@ -7,19 +7,19 @@
       <% end %>
     </div>
     <div class="top-item">
-      <%= link_to public_stories_path do %>
+      <%= link_to stories_path do %>
         <div><%= image_tag('candle.jpg', size:"150x150" ) %></div>
         <span>ストーリー一覧</span>
       <% end %>
     </div>
     <div class="top-item">
-      <%= link_to public_users_path do %>
+      <%= link_to users_path do %>
         <div><%= image_tag('tree.jpg', size:"150x150" ) %></div>
         <span>ユーザー一覧</span>
       <% end %>
     </div>
     <div class="top-item">
-      <%= link_to public_groups_path do %>
+      <%= link_to groups_path do %>
         <div><%= image_tag('coffeecup.jpg', size:"150x150" ) %></div>
         <span>グループ一覧</span>
       <% end %>
@@ -32,19 +32,19 @@
     </div>
     <% if user_signed_in? %>
       <div class="top-item">
-        <%= link_to public_user_path(current_user.id) do %>
+        <%= link_to user_path(current_user.id) do %>
           <div><%= image_tag('house.jpg' ,size:"150x150" ) %></div>
           <span>マイページ</span>
         <% end %>
       </div>
       <div class="top-item">
-      <%= link_to new_public_story_path do %>
+      <%= link_to new_story_path do %>
         <div><%= image_tag('manuscript.jpg' ,size:"150x150" ) %></div>
         <span>ストーリーを投稿する</span>
       <% end %>
       </div>
       <div class="top-item">
-        <%= link_to new_public_suggestions_path do %>
+        <%= link_to new_suggestions_path do %>
           <div><%= image_tag('bird.jpg' ,size:"150x150" ) %></div>
           <span>投書箱</span>
         <% end %>

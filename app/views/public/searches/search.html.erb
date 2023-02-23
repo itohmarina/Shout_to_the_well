@@ -20,7 +20,7 @@
         <% @users.each do |user| %>
           <tr>
             <td><%= image_tag user.get_user_image, size:'100x100' %></td>
-            <td><%= link_to user.name, public_user_path(user.id) %></td>
+            <td><%= link_to user.name, user_path(user.id) %></td>
             <td><%= user.introduction %></td>
           </tr>
         <% end %>
@@ -33,7 +33,7 @@
         <h5>新規投稿順</h5>
         <% @stories.each do |story| %>
           <tr>
-            <td><%= link_to story.title, public_story_path(story.id) %></td>
+            <td><%= link_to story.title, story_path(story.id) %></td>
             <td><%= story.summary %></td>
           </tr>
         <% end %>
@@ -47,7 +47,7 @@
         <% @groups.each do |group| %>
           <tr>
             <td><%= image_tag group.get_group_image, size:'100x100' %></td>
-            <td><%= link_to group.name, public_group_path(group.id) %></td>
+            <td><%= link_to group.name, group_path(group.id) %></td>
             <td><%= group.introduction %></td>
           </tr>
         <% end %>

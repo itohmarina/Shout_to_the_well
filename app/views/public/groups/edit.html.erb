@@ -2,7 +2,7 @@
   <div class='row'>
     <div class='col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto'>
   		<h2>Group infomation</h2>
-  		<%= form_with model: @group, url: public_group_path, method: :patch do |f| %>
+  		<%= form_with model: @group, url: group_path, method: :patch do |f| %>
   		  <%= render 'layouts/errors', obj: @group %>
   		  <div class="form-group">
   		    <%= f.label :name, "グループ名(20文字以内)" %><br>
@@ -19,7 +19,7 @@
       <% end %>
       <div>
         <% if current_user.id == @group.owner_id %>
-          <%= link_to "グループを削除する", url_for("/public/groups/close/#{@group.id}"), data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+          <%= link_to "グループを削除する", url_for("/groups/close/#{@group.id}"), data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
         <% end %>
       </div>
       <div>

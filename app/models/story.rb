@@ -1,8 +1,8 @@
 class Story < ApplicationRecord
 
-  validates :title, length: { in: 1..50 }
-  validates :body, length: { in: 1..2000 }
-  validates :summary, length: { in: 1..100 }
+  validates :title, presence: true, length: { in: 1..50 }
+  validates :body, presence: true, length: { in: 1..2000 }
+  validates :summary, presence: true, length: { in: 1..100 }
 
   belongs_to :user
   belongs_to :genre

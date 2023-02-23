@@ -6,7 +6,7 @@
 <% end %>
 <% if user_signed_in? %>
   <div>
-    <%= link_to "グループを作成する", new_public_group_path %>
+    <%= link_to "グループを作成する", new_group_path %>
   </div>
 <% end %>
 <table class="table table-inverse white">
@@ -14,7 +14,7 @@
     <% @groups.each do |group| %>
       <tr>
         <td><%= image_tag group.get_group_image %></td>
-        <td><%= link_to "#{group.name}", public_group_path(group.id) %></td>
+        <td><%= link_to "#{group.name}", group_path(group.id) %></td>
         <td><%= group.introduction %></td>
       </tr>
     <% end %>

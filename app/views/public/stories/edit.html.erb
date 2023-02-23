@@ -5,7 +5,7 @@
     </div>
     <div class='col-md-8 offset-md-1'>
   		<h2>Edit Story</h2>
-  		<%= form_with model: @story, url: public_story_path, method: :patch do |f| %>
+  		<%= form_with model: @story, url: story_path, method: :patch do |f| %>
   		  <%= render 'layouts/errors', obj: @story %>
         <div class="form-group">
           <%= f.label :title, "タイトル(50文字以内)" %><br>

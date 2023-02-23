@@ -4,9 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :email, uniqueness: true
+  validates :email, presence: true, uniqueness: true
   validates :name, presence: true, uniqueness: true, length: { in: 1..20 }
-  validates :introduction, length: { maximum: 200 }
+  validates :introduction, presence: true, length: { maximum: 200 }
 
   has_one_attached :user_image
 
@@ -36,10 +36,6 @@ class User < ApplicationRecord
     (user_image.attached?) ? user_image : 'no_image.jpg'
   end
 
-  # has_one_attached :user_icon do |attachable|
-  #   attachable.variant :icon, resize_to_limit: [30, 30]
-  # end
-  #<%= image_tag story_comment.avatar.variant(:icon) %>をviewに貼り付ける
 
   def follow(user_id)
     relationships.create!(followed_id: user_id)

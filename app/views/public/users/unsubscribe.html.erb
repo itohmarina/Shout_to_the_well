@@ -4,7 +4,7 @@
       <h5>本当に退会しますか？</h5>
       <div>
         <%= link_to "退会する", "/public/withdraw", method: :patch, class: "btn btn-danger" %>
-        <%= link_to "マイページに戻る", public_user_path(current_user.id), class: "btn btn-primary" %>
+        <%= link_to "マイページに戻る", user_path(current_user.id), class: "btn btn-primary" %>
       </div>
     </div>
   </div>

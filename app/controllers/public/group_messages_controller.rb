@@ -7,8 +7,8 @@ class Public::GroupMessagesController < ApplicationController
     group_message.user_id = current_user.id
     group_message.group_id = @group.id
 
-    if group_message.save!
-      redirect_to public_group_path(@group.id)
+    if group_message.save
+      ActionCable.server.broadcast "chats_channel_#{params['room_id']}", message: render_message(data)
     else
       render "public/groups/show"
     end

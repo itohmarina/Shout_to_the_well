@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   end
 
 
-  namespace :public do
+  scope module: :public do
     resources :users, only:[:show, :index, :edit, :update]
     get 'users/:id/story_index' => 'users#story_index'
     get '/unsubscribe' => 'users#unsubscribe'

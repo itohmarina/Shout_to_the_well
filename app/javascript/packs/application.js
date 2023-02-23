@@ -13,6 +13,7 @@ import "bootstrap";
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 import "form.js"
+// import "chat.js"
 
 Rails.start()
 Turbolinks.start()

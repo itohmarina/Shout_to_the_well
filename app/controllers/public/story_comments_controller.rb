@@ -6,7 +6,7 @@ class Public::StoryCommentsController < ApplicationController
     @story_comment = StoryComment.new(comment_id: params[:story_comment][:comment_id])
     @story_comment.user_id = current_user.id
     @story_comment.story_id = @story.id
-    if @story_comment.save!
+    if @story_comment.save
       redirect_to request.referer
     else
       render "public/stories/show"

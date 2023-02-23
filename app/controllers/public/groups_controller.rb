@@ -9,7 +9,7 @@ class Public::GroupsController < ApplicationController
   def create
     @group=Group.new(group_params)
     @group.owner_id = current_user.id
-    if @group.save!
+    if @group.save
       GroupUser.create!(group_id: @group.id, user_id: current_user.id, request_is_accepted: true)
       redirect_to public_group_path(@group.id)
     else

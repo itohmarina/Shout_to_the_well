@@ -37,7 +37,7 @@ class Public::StoriesController < ApplicationController
     @story.score = Language.get_data(story_params[:body])
     @story.user_id = current_user.id
     @user = current_user
-    if @story.save!
+    if @story.save
       redirect_to public_story_path(@story.id), notice: "ストーリーを投稿しました"
     else
       @valid_genres = Genre.all.where(is_deleted: false)

@@ -5,7 +5,25 @@
     </div>
     <div class='col-md-8 offset-md-1'>
       <div id="group_messages_<%= @group.id %>">
-        <%= render "public/group_messages/message", group_messages: @group_messages, group_message: @group_message, group: @group %>
+        <% if group.users.include?(current_user) %>
+        	<h5>チャットコーナー</h5>
+        	<div>
+        	  <input type="text" data-behavior="group_speaker" data-user=<%= current_user.id %> data-group=<%= @group.id %>>
+            <%#= form_with model:[:public, @group, @group_message], method: :post do |f| %>
+              <%#= f.text_area :body, placeholder:"メッセージを入れてください(200文字以内)", class: "input-text", cols:"50", rows:"2" %>
+              <!--<p class = "counter">0文字</p>-->
+              <%#= f.submit "投稿",class:"btn btn-primary" %>
+            <%# end %>
+          </div>
+        	<div class="messages_container">
+            
+             <%= render "public/group_messages/message", locals: {group_messages: @group_messages, group: @group } %>
+              
+          </div>
+          <%= paginate @group_messages %>
+        <% else %>
+          <h5>チャットはグループメンバーのみ閲覧できます</h5>
+        <% end %>
       </div>
     </div>
   </div>

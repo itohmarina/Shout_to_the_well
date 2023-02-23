@@ -19,7 +19,7 @@ class Public::SuggestionsController < ApplicationController
     if params[:back] || !@suggestion.save
       render "public/suggestions/new"
     else
-      redirect_to public_suggestions_thanks_path
+      redirect_to suggestions_thanks_path
     end
   end
 
