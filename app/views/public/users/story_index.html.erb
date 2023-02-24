@@ -8,7 +8,6 @@
 </div>
 
 <%= render "public/stories/index", stories: @stories %>
-
 <% if user_signed_in? && @user == current_user %>
   <h5>非公開中のストーリー一覧</h5>
   <%= render "public/stories/index", stories: @private_stories %>
