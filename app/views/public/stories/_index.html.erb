@@ -3,18 +3,18 @@
     <% if stories.present? %>
       <% stories.each do |story| %>
         <tr>
-          <td class="td-wrap"><%= link_to story.title, story_path(story.id) %></td>
+          <td class="td-wrap"><%= link_to story.title, public_story_path(story.id) %></td>
           <td class="td-wrap" colspan="7"><%= story.summary %></td>
         </tr>
         <tr>
           <td></td>
-          <td><%= link_to story.genre.name, genre_path(story.genre.id) %></td>
+          <td><%= link_to story.genre.name, public_genre_path(story.genre.id) %></td>
           <td class="favorite_buttons_<%= story.id %>"><%= render "public/favorites/favorite", story: story %></td>
           <td class="td-nowrap">コメント数:<%= story.story_comments.count %></td>
           <td><span class="sentiment-score">本文の感情分析スコア<%= story.score %></span></td>
           <% if user_signed_in? && story.user == current_user %>
-            <td class="td-nowrap"><%= link_to '編集', edit_story_path(story.id), class: "btn btn-sm btn-outline-success" %></td>
-            <td class="td-nowrap"><%= link_to '削除', story_path(story.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%></td>
+            <td class="td-nowrap"><%= link_to '編集', edit_public_story_path(story.id), class: "btn btn-sm btn-outline-success" %></td>
+            <td class="td-nowrap"><%= link_to '削除', public_story_path(story.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger"%></td>
           <% else %>
             <td colspan="2"></td>
           <% end %>

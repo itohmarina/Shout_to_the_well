@@ -1,0 +1,33 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: ニックネーム
+        email: メールアドレス
+        password: パスワード
+      suggestions:
+        title: タイトル
+        body: 本文
+      stories:
+        title: タイトル
+        body: 本文
+        genre_id: ジャンル
+        summary: 要約
+      public_messages:
+        body: メッセージ
+      groups:
+        name: グループ名
+        introduction: グループ紹介
+      group_messages:
+        body: メッセージ
+      genres:
+        name: ジャンル名
+      comments:
+        body: コメント
+      admins:
+        email:　メールアドレス
+        password: パスワード
+  # activemodel:   # Formオブジェクトを用いた場合
+  #   attributes:
+  #     order_object:
+  #       post_code: 郵便番号
