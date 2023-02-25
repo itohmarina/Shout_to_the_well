@@ -57,7 +57,7 @@ Rails.application.routes.draw do
     end
 
     resource :suggestions, only:[:new, :create]
-    get 'suggestions/confirm' => 'suggestions#confirm'
+    post 'suggestions/confirm' => 'suggestions#confirm'
     get 'suggestions/thanks' => 'suggestions#thanks'
 
     resources :genres, only:[:show]

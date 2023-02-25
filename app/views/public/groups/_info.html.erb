@@ -15,14 +15,14 @@
   <% if @group.users.include?(current_user) %>
     <tr>
       <td colspan="2">
-        <%= link_to edit_group_path, class: "btn btn-outline-secondary btn-block" do %>
+        <%= link_to edit_group_path(group.id), class: "btn btn-outline-secondary btn-block" do %>
           <i class="fas fa-user-cog"></i>
         <% end %>
       </td>
     </tr>
     <tr>
       <td colspan="2">
-        <%= link_to "ほかのユーザーを招待する", new_group_group_users_path(@group.id) %>
+        <%= link_to "ほかのユーザーを招待する", new_group_group_users_path(group.id) %>
       </td>
     </tr>
   <% end %>
@@ -38,9 +38,9 @@
   <% end %>
 
   <% if @group.users.include?(current_user) %>
-    <% if current_user.id != @group.owner_id %>
+    <% if current_user.id != group.owner_id %>
       <tr>
-        <td colspan="2"><%= link_to "グループを退会する", group_group_users_path(@group.id, withdraw_id: current_user.id), method: :delete %></td>
+        <td colspan="2"><%= link_to "グループを退会する", group_group_users_path(group.id, withdraw_id: current_user.id), method: :delete %></td>
       </tr>
     <% end %>
   <% end %>

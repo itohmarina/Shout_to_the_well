@@ -36,7 +36,7 @@ class Public::PublicMessagesController < ApplicationController
     user_id=@public_message.user_id.to_i
     login_user_id = current_user.id
     if user_id != login_user_id
-      redirect_to public_user_path(login_user_id)
+      redirect_to user_path(login_user_id)
     end
   end
 

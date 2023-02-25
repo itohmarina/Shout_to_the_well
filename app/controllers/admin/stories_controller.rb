@@ -9,10 +9,10 @@ class Admin::StoriesController < ApplicationController
     @story = Story.find(params[:id])
     if @story.is_deleted == false
       @story.update(is_deleted: true)
-      redirect_to public_story_path(@story.id)
+      redirect_to story_path(@story.id)
     else
       @story.update(is_deleted: false)
-      redirect_to public_story_path(@story.id)
+      redirect_to story_path(@story.id)
     end
   end
 

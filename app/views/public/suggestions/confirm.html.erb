@@ -7,7 +7,7 @@
         投書の内容は以下でよろしいでしょうか？
       </div>
       <div>
-        <%= form_with model: @suggestion, url: suggestions_path, method: :post do |f| %>
+        <%= form_with model: @suggestion, method: :post do |f| %>
           <div class="white">
             <div>
               <h5><%= @suggestion.title %></h5>

@@ -13,6 +13,8 @@ class Public::SuggestionsController < ApplicationController
     end
   end
 
+
+
   def create
     @suggestion = Suggestion.new(suggestion_params)
     @suggestion.user_id =current_user.id

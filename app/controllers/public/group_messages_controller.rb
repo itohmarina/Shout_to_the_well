@@ -8,7 +8,9 @@ class Public::GroupMessagesController < ApplicationController
     group_message.group_id = @group.id
 
     if group_message.save
-      ActionCable.server.broadcast "chats_channel_#{params['room_id']}", message: render_message(data)
+      # ActionCable.server.broadcast "chats_channel_#{params['room_id']}", message: render_message(data)
+      @group_messages = GroupMessage.where(group_id: @group.id).page(params[:page])
+      redirect_to group_path(@group.id)
     else
       render "public/groups/show"
     end
@@ -18,7 +20,7 @@ class Public::GroupMessagesController < ApplicationController
     group_message = GroupMessage.find(params[:id])
 
     if group_message.destroy
-      redirect_to public_group_path(@group.id)
+      redirect_to group_path(@group.id)
     else
       render "public/groups/show"
     end
@@ -35,7 +37,7 @@ class Public::GroupMessagesController < ApplicationController
   def for_group_show
     @group = Group.find(params[:group_id])
     @users = @group.users
-    @group_messages = GroupMessage.where(group_id: @group.id)
+    @group_messages = GroupMessage.where(group_id: @group.id).page(params[:page])
     @group_message = GroupMessage.new
   end
 

@@ -11,7 +11,7 @@ class Public::GroupsController < ApplicationController
     @group.owner_id = current_user.id
     if @group.save
       GroupUser.create!(group_id: @group.id, user_id: current_user.id, request_is_accepted: true)
-      redirect_to public_group_path(@group.id)
+      redirect_to group_path(@group.id)
     else
       render "public/groups/new"
     end
@@ -36,7 +36,7 @@ class Public::GroupsController < ApplicationController
   def update
     @group = Group.find(params[:id])
     if @group.update(group_params)
-      redirect_to public_group_path(@group.id)
+      redirect_to group_path(@group.id)
     else
       render "public/groups/edit"
     end

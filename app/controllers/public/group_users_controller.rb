@@ -18,7 +18,7 @@ class Public::GroupUsersController < ApplicationController
     group = Group.find(params[:group_id])
     user.leave_group(group.id)
     flash[:notice] = "グループを退会しました"
-    redirect_to public_group_path(group.id)
+    redirect_to group_path(group.id)
   end
 
   #グループ参加リクエストを受け付ける
@@ -27,7 +27,7 @@ class Public::GroupUsersController < ApplicationController
 
     if @group_user.update(request_is_accepted: true)
       flash[:notice] = "グループに参加しました"
-      redirect_to public_group_path(@group_user.group.id)
+      redirect_to group_path(@group_user.group.id)
     else
       redirect_to request.referer
     end

@@ -9,10 +9,10 @@ class Admin::UsersController < ApplicationController
     @user=User.find(params[:id])
     if @user.is_deleted == false
       @user.update(is_deleted: true)
-      redirect_to public_user_path(@user.id)
+      redirect_to user_path(@user.id)
     else
       @user.update(is_deleted: false)
-      redirect_to public_user_path(@user.id)
+      redirect_to user_path(@user.id)
     end
   end
 

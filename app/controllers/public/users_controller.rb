@@ -24,7 +24,7 @@ class Public::UsersController < ApplicationController
     @user=current_user
 
     if @user.update(user_params)
-      redirect_to public_user_path(current_user.id), notice: "ユーザー情報を更新しました"
+      redirect_to user_path(current_user.id), notice: "ユーザー情報を更新しました"
     else
       render 'public/users/edit'
     end

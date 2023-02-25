@@ -17,7 +17,7 @@ class Public::StoriesController < ApplicationController
     end
     @user = User.find(@story.user_id)
     @story_comments = @story.story_comments.order(id: "DESC").page(params[:page])
-    @comments = Comment.all
+    @comments = Comment.all.where(is_deleted: false)
     @story_comment = StoryComment.new
   end
 
@@ -38,7 +38,7 @@ class Public::StoriesController < ApplicationController
     @story.user_id = current_user.id
     @user = current_user
     if @story.save
-      redirect_to public_story_path(@story.id), notice: "ストーリーを投稿しました"
+      redirect_to story_path(@story.id), notice: "ストーリーを投稿しました"
     else
       @valid_genres = Genre.all.where(is_deleted: false)
       render 'public/stories/new'
@@ -57,7 +57,7 @@ class Public::StoriesController < ApplicationController
     is_matching_login_user
 
     if @story.update(story_params)
-      redirect_to public_story_path(@story.id), notice: "ストーリーを更新しました"
+      redirect_to story_path(@story.id), notice: "ストーリーを更新しました"
     else
       render 'public/stories/edit'
     end
@@ -69,7 +69,7 @@ class Public::StoriesController < ApplicationController
 
     if @story.destroy
       flash[:notice]="ストーリーを削除しました"
-      redirect_to public_user_path
+      redirect_to user_path
     else
       @user = current_user
       render "public/users/story_index"
@@ -86,7 +86,7 @@ class Public::StoriesController < ApplicationController
     user_id=@story.user_id.to_i
     login_user_id = current_user.id
     if(user_id != login_user_id)
-      redirect_to public_user_path(login_user_id)
+      redirect_to user_path(login_user_id)
     end
   end
 

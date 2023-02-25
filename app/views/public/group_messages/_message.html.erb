@@ -1,7 +1,7 @@
 
-<% if @group_messages.present? %>
-  <% @group_messages.each do |group_message| %>
-    <% if current_user.nil? %>
+<% if group_messages.present? %>
+  <% group_messages.each do |group_message| %>
+    <%# if current_user.nil? %>
       <div class = "shadow message_container">
         <div class = "message_sub_container">
           <div class = "message_userimage"><%= image_tag group_message.user.get_user_image, size:"30x30", class:"rounded-circle" %></div>
@@ -12,12 +12,12 @@
           <div class="messaage_body"><%= group_message.body %></div>
           <div class="message_btn">
             <% if current_user.id == group_message.group.owner_id || current_user.id == group_message.user_id %>
-              <%= link_to '削除', group_group_message_path(group.id, group_message.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline-danger text-nowrap" %>
+              <%= link_to '削除', group_group_message_path(group.id, group_message.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger text-nowrap" %>
             <% end %>
           </div>
         </div>
       </div>
-    <% else %>
+    <%# else %>
       <%# ActionCableから受け取る場合の表示 %>
       <!--<div class = "shadow message_container message">-->
       <!--  <div class = "message_sub_container">-->
@@ -26,7 +26,7 @@
       <!--    <div class="message_time"><%#= group_message.created_at.strftime('%Y/%m/%d %H:%M') %></div>-->
       <!--  </div>-->
       <!--  <div class = "message_sub_container">-->
-          <div id="add-message" class="messaage_body"><%= group_message['messagebody'] %></div>
+          <!--<div id="add-message" class="messaage_body"><%#= group_message['messagebody'] %></div>-->
       <!--    <div class="message_btn">-->
       <!--      <%# if current_user.id == group_message.group.owner_id || current_user.id == group_message.user_id %>-->
       <!--        <%# link_to '削除', public_group_group_message_path(group.id, group_message.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-outline-danger text-nowrap" %>-->
@@ -34,6 +34,6 @@
       <!--    </div>-->
       <!--  </div>-->
       <!--</div>-->
-    <% end %>
+    <%# end %>
   <% end %>
 <% end %>

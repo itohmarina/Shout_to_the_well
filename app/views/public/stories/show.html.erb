@@ -4,7 +4,7 @@
     <div class='col-md-3 white'>
       <%= render 'public/users/info', user:@user %>
       <div>
-        <%= link_to "ユーザーページ", public_user_path(@user.id) %>
+        <%= link_to "ユーザーページ", user_path(@user.id) %>
       </div>
     </div>
     <div class='col-md-8 offset-md-1 white'>
@@ -22,8 +22,8 @@
       </div>
       <div>
         <% if @story.user == current_user %>
-          <%= link_to '編集', edit_public_story_path(@story), class: "btn btn-sm btn-success" %>
-          <%= link_to '削除', public_story_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+          <%= link_to '編集', edit_story_path(@story), class: "btn btn-sm btn-success" %>
+          <%= link_to '削除', story_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
           <% if @story.is_private == true %>
             <div>現在、ストーリーは非公開になっています</div>
           <% end %>
