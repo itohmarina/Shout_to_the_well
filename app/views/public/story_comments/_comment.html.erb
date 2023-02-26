@@ -16,10 +16,11 @@
 <%= paginate story_comments %>
 <div class="comment-form">
   <h6>送りたいコメントを選んでください</h6>
-  <%= form_with(scope: :story_comment, model:[story, story_comment], method: :post) do |f| %>
+  <%= form_with(model:[story, story_comment], url: story_story_comments_path(story.id), method: :post) do |f| %>
+  <!--model:[story, story_comment]-->
     <% comments.each do |comment| %>
       <div>
-        <%= f.radio_button :comment_id, comment.id %>
+        <%= f.radio_button :comment_id, comment.id, checked: true %>
         <%= f.label :comment_id, comment.body %>
       </div>
     <% end %>
