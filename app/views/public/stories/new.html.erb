@@ -1,10 +1,8 @@
 <div class='container'>
   <div class='row'>
-    <div class='col-md-3'>
-      <%= render 'public/users/info', user: @user %>
-    </div>
-    <div class='col-md-8 offset-md-1 story-form'>
+    <div class='col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto story-form'>
   		<%= form_with model: @story, url: stories_path, method: :post do |f| %>
+  		  <h2>New Story</h2>
   		  <%= render 'layouts/errors', obj: @story %>
         <div class="form-group">
           <%= f.label :title, "タイトル(50文字以内)" %><br>

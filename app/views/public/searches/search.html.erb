@@ -1,57 +1,63 @@
-<% if @range == "User" %>
-  <h2><%= @word %>を含むユーザー一覧</h2>
-<% elsif @range == "Story" %>
-  <h2><%= @word %>を含むストーリー一覧</h2>
-  <% if @genre.present? %>
-    <div>
-      <h5>ジャンル名:<%= @genre.name %>を表示しています</h5>
-    </div>
-  <% end %>
-<% else %>
-  <h2><%= @word %>を含むグループ一覧</h2>
-<% end %>
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <% if @range == "User" %>
+        <h2><%= @word %>を含むユーザー一覧</h2>
+      <% elsif @range == "Story" %>
+        <h2><%= @word %>を含むストーリー一覧</h2>
+        <% if @genre.present? %>
+          <div>
+            <h5>ジャンル名:<%= @genre.name %>を表示しています</h5>
+          </div>
+        <% end %>
+      <% else %>
+        <h2><%= @word %>を含むグループ一覧</h2>
+      <% end %>
 
-<table class="table table-hover table-inverse white">
-  <!--検索対象モデルがUserの時 -->
-  <% if @range == "User" %>
-    <tbody>
-      <% if @users.present? %>
-        <h5>新規登録順</h5>
-        <% @users.each do |user| %>
-          <tr>
-            <td><%= image_tag user.get_user_image, size:'100x100' %></td>
-            <td><%= link_to user.name, user_path(user.id) %></td>
-            <td><%= user.introduction %></td>
-          </tr>
+      <table class="table table-hover table-inverse white">
+        <!--検索対象モデルがUserの時 -->
+        <% if @range == "User" %>
+          <tbody>
+            <% if @users.present? %>
+              <h5>新規登録順</h5>
+              <% @users.each do |user| %>
+                <tr>
+                  <td><%= image_tag user.get_user_image, size:'100x100' %></td>
+                  <td class="td-wrap"><%= link_to user.name, user_path(user.id) %></td>
+                  <td class="td-wrap"><%= user.introduction %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        <% elsif @range == "Story" %>
+          <!--検索対象モデルがStoryの時) -->
+          <tbody>
+            <% if @stories.present? %>
+              <h5>新規投稿順</h5>
+              <% @stories.each do |story| %>
+                <tr>
+                  <td class="td-wrap"><%= link_to story.title, story_path(story.id) %></td>
+                  <td class="td-wrap"><%= story.summary %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        <% else %>
+          <!--検索対象モデルがGroupの時-->
+          <tbody>
+            <% if @groups.present? %>
+              <h5>新規作成順</h5>
+              <% @groups.each do |group| %>
+                <tr>
+                  <td><%= image_tag group.get_group_image, size:'100x100' %></td>
+                  <td class="td-wrap"><%= link_to group.name, group_path(group.id) %></td>
+                  <td class="td-wrap"><%= group.introduction %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
         <% end %>
-      <% end %>
-    </tbody>
-  <% elsif @range == "Story" %>
-    <!--検索対象モデルがStoryの時) -->
-    <tbody>
-      <% if @stories.present? %>
-        <h5>新規投稿順</h5>
-        <% @stories.each do |story| %>
-          <tr>
-            <td><%= link_to story.title, story_path(story.id) %></td>
-            <td><%= story.summary %></td>
-          </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  <% else %>
-    <!--検索対象モデルがGroupの時-->
-    <tbody>
-      <% if @groups.present? %>
-        <h5>新規作成順</h5>
-        <% @groups.each do |group| %>
-          <tr>
-            <td><%= image_tag group.get_group_image, size:'100x100' %></td>
-            <td><%= link_to group.name, group_path(group.id) %></td>
-            <td><%= group.introduction %></td>
-          </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  <% end %>
-</table>
+      </table>
+    </div>
+  </div>
+</div>

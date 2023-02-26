@@ -1,27 +1,33 @@
-<h5>グループ<%= @group.name %>に招待するユーザーを選択してください</h5>
-<h6>あなたがフォローしているユーザーを招待できます。</h6>
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <h5>グループ<%= @group.name %>に招待するユーザーを選択してください</h5>
+      <h6>あなたがフォローしているユーザーを招待できます。</h6>
 
-<% if @users.present? %>
-  <% @users.each do |user| %>
-    <table>
-      <tr>
-        <td><%= image_tag user.get_user_image, size: "100x100" %></td>
-        <td><%= user.name %></td>
-        <% if user.requested?(@group) %>
-          <% if user.joining?(@group.id) %>
-            <td>参加中です</td>
-            <% if current_user.id == @group.owner_id %>
-              <td><%= link_to "グループを退会させる", group_group_users_path(@group.id, withdraw_id: user.id), method: :delete %></td>
-            <% end %>
-          <% else %>
-            <td colspan="2">招待中です</td>
-          <% end %>
-        <% else %>
-          <td colspan="2">
-            <%= link_to "招待する", group_group_users_path(@group.id, invited_id: user.id), method: :post %>
-          </td>
+      <% if @users.present? %>
+        <% @users.each do |user| %>
+          <table>
+            <tr>
+              <td><%= image_tag user.get_user_image, size: "100x100" %></td>
+              <td><%= user.name %></td>
+              <% if user.requested?(@group) %>
+                <% if user.joining?(@group.id) %>
+                  <td>参加中です</td>
+                  <% if current_user.id == @group.owner_id %>
+                    <td><%= link_to "グループを退会させる", group_group_users_path(@group.id, withdraw_id: user.id), method: :delete %></td>
+                  <% end %>
+                <% else %>
+                  <td colspan="2">招待中です</td>
+                <% end %>
+              <% else %>
+                <td colspan="2">
+                  <%= link_to "招待する", group_group_users_path(@group.id, invited_id: user.id), method: :post %>
+                </td>
+              <% end %>
+            </tr>
+          </ta>
         <% end %>
-      </tr>
-    </ta>
-  <% end %>
-<% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

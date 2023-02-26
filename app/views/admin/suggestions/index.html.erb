@@ -1,17 +1,23 @@
-<h2>投書一覧</h2>
-<table class="table table-inverse white">
-  <tbody>
-    <% if @suggestions.present? %>
-      <% @suggestions.each do |suggestion| %>
-        <tr>
-          <td>
-            <%= suggestion.created_at.strftime('%Y/%m/%d') %>
-            <%= link_to suggestion.title, admin_suggestion_path(suggestion.id) %>
-          </td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <h2>投書一覧</h2>
+      <table class="table table-inverse white">
+        <tbody>
+          <% if @suggestions.present? %>
+            <% @suggestions.each do |suggestion| %>
+              <tr>
+                <td>
+                  <%= suggestion.created_at.strftime('%Y/%m/%d') %>
+                  <%= link_to suggestion.title, admin_suggestion_path(suggestion.id) %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
 
-<%= link_to "管理者トップへ戻る", admin_path %>
+      <%= link_to "管理者トップへ戻る", admin_path %>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@
     </div>
     <div class='col-md-8 offset-md-1 user-items'>
       <div class="user-item">
-        <%= link_to stories_path(@user.id) do %>
+        <%= link_to users_story_index_path(@user.id) do %>
           <div><%= image_tag('books.jpg' ,size:"150x150" ) %></div>
           <span>ストーリー一覧</span>
         <% end %>

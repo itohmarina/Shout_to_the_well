@@ -1,21 +1,27 @@
-<h2><%= @user.name %>さんのフォロワー一覧</h2>
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <h2><%= @user.name %>さんのフォロワー一覧</h2>
 
-<table class="table table-inverse white">
-  <tbody>
-    <% if @users.present? %>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= image_tag user.get_user_image, size:"100x100" %></td>
-          <td><%= link_to "#{user.name}", user_path(user.id) %></td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-<div>
-  <% if user_signed_in? && @user == current_user %>
-    <%= link_to "マイページに戻る", user_path(current_user.id) %>
-  <% else %>
-    <%= link_to "ユーザーページに戻る", user_path(@user.id) %>
-  <% end %>
+      <table class="table table-inverse white">
+        <tbody>
+          <% if @users.present? %>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= image_tag user.get_user_image, size:"100x100" %></td>
+                <td><%= link_to "#{user.name}", user_path(user.id) %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <div>
+        <% if user_signed_in? && @user == current_user %>
+          <%= link_to "マイページに戻る", user_path(current_user.id) %>
+        <% else %>
+          <%= link_to "ユーザーページに戻る", user_path(@user.id) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

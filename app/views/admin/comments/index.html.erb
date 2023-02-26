@@ -1,23 +1,29 @@
-<h2>コメント一覧</h2>
-<table class="table table-inverse white">
-  <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.body %></td>
-        <% if comment.is_deleted == false %>
-          <td><%= link_to "無効化する", admin_comment_path(comment.id), method: :patch, class:"btn btn-outline-danger" %></td>
-        <% else %>
-          <td><%= link_to "有効化する", admin_comment_path(comment.id), method: :patch, class:"btn btn-outline-success" %></td>
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <h2>コメント一覧</h2>
+      <table class="table table-inverse white">
+        <tbody>
+          <% @comments.each do |comment| %>
+            <tr>
+              <td><%= comment.body %></td>
+              <% if comment.is_deleted == false %>
+                <td><%= link_to "無効化する", admin_comment_path(comment.id), method: :patch, class:"btn btn-outline-danger" %></td>
+              <% else %>
+                <td><%= link_to "有効化する", admin_comment_path(comment.id), method: :patch, class:"btn btn-outline-success" %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div>
+        <%= form_with model:[:admin, @comment], method: :post do |f| %>
+          <%= f.label :body, "コメント作成(50文字以内)" %><br>
+          <%= f.text_area :body, placeholder: "コメントを入力してください", class: "title-text", cols:"50", rows:"2" %>
+          <p class = "title-counter">0文字</p>
+          <%= f.submit "コメント作成", name: nil, class: "btn btn-primary" %>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<div>
-  <%= form_with model:[:admin, @comment], method: :post do |f| %>
-    <%= f.label :body, "コメント作成(50文字以内)" %><br>
-    <%= f.text_area :body, placeholder: "コメントを入力してください", class: "title-text", cols:"50", rows:"2" %>
-    <p class = "title-counter">0文字</p>
-    <%= f.submit "コメント作成", name: nil, class: "btn btn-primary" %>
-  <% end %>
+      </div>
+    </div>
+  </div>
 </div>

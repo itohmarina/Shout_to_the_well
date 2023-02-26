@@ -1,5 +1,11 @@
-<h2>ストーリー一覧</h2>
-<% if admin_signed_in? %>
-  <%= link_to '閲覧制限中のストーリー一覧はこちら', admin_stories_path %>
-<% end %>
-<%= render "public/stories/index", stories: @stories %>
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <h2>ストーリー一覧</h2>
+      <% if admin_signed_in? %>
+        <%= link_to '閲覧制限中のストーリー一覧はこちら', admin_stories_path %>
+      <% end %>
+      <%= render "public/stories/index", stories: @stories %>
+    </div>
+  </div>
+</div>

@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :users, only:[:show, :index, :edit, :update]
-    get 'users/:id/story_index' => 'users#story_index'
+    get 'users/:id/story_index' => 'users#story_index', as: "users_story_index"
     get '/unsubscribe' => 'users#unsubscribe'
     patch '/withdraw' => 'users#withdrawal'
     get 'users/:id/group_index' => 'users#group_index', as: "users_group_index"

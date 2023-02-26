@@ -1,14 +1,19 @@
-<h2>ここは公開チャットコーナーです</h2>
-<h6>公序良俗に違反するような内容があった場合、予告なく管理者がメッセージを削除したり、違反したユーザーを退会させる場合があります。</h6>
-<%= link_to "トップページに戻る", root_path %>
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <h2>ここは公開チャットコーナーです</h2>
+      <h6>公序良俗に違反するような内容があった場合、予告なく管理者がメッセージを削除したり、違反したユーザーを退会させる場合があります。</h6>
+      <%= link_to "トップページに戻る", root_path %>
 
-<% if user_signed_in? %>
-  <%= render "public/public_messages/form", public_message: @public_message %>
-<% else %>
-  <div class="public-message-form white">
-    <h5>ログインすると、コメントできます。</h5>
+      <% if user_signed_in? %>
+        <%= render "public/public_messages/form", public_message: @public_message %>
+      <% else %>
+        <div class="public-message-form white">
+          <h5>ログインすると、コメントできます。</h5>
+        </div>
+      <% end %>
+
+      <%= render "public/public_messages/messages", public_messages: @public_messages %>
+    </div>
   </div>
-<% end %>
-
-
-<%= render "public/public_messages/messages", public_messages: @public_messages %>
+</div>

@@ -1,23 +1,29 @@
-<h2>グループ一覧</h2>
-<% if admin_signed_in? %>
-  <div>
-    <%= link_to '閉鎖中のグループ一覧はこちら', admin_groups_path %>
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <h2>グループ一覧</h2>
+      <% if admin_signed_in? %>
+        <div>
+          <%= link_to '閉鎖中のグループ一覧はこちら', admin_groups_path %>
+        </div>
+      <% end %>
+      <% if user_signed_in? %>
+        <div>
+          <%= link_to "グループを作成する", new_group_path %>
+        </div>
+      <% end %>
+      <table class="table table-inverse white">
+        <tbody>
+          <% @groups.each do |group| %>
+            <tr>
+              <td><%= image_tag group.get_group_image %></td>
+              <td><%= link_to "#{group.name}", group_path(group.id) %></td>
+              <td><%= group.introduction %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @groups %>
+    </div>
   </div>
-<% end %>
-<% if user_signed_in? %>
-  <div>
-    <%= link_to "グループを作成する", new_group_path %>
-  </div>
-<% end %>
-<table class="table table-inverse white">
-  <tbody>
-    <% @groups.each do |group| %>
-      <tr>
-        <td><%= image_tag group.get_group_image %></td>
-        <td><%= link_to "#{group.name}", group_path(group.id) %></td>
-        <td><%= group.introduction %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @groups %>
+</div>

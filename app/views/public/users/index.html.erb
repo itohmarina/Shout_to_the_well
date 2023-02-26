@@ -1,15 +1,21 @@
-<h2>ユーザー一覧</h2>
-<% if admin_signed_in? %>
-  <%= link_to '退会済みのユーザー一覧はこちら', admin_users_path %>
-<% end %>
-<table class='table table-inverse white'>
-  <% if @users.present? %>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%= link_to user.name, user_path(user.id) %></td>
-      <td><%= user.introduction %></td>
-    </tr>
-    <% end %>
-  <% end %>
-</table>
-<%= paginate @users %>
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <h2>ユーザー一覧</h2>
+      <% if admin_signed_in? %>
+        <%= link_to '退会済みのユーザー一覧はこちら', admin_users_path %>
+      <% end %>
+      <table class='table table-inverse white'>
+        <% if @users.present? %>
+          <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, user_path(user.id) %></td>
+            <td><%= user.introduction %></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </table>
+      <%= paginate @users %>
+    </div>
+  </div>
+</div>
