@@ -3,14 +3,14 @@ class Public::StoryCommentsController < ApplicationController
 
   def create
     @story = Story.find(params[:story_id])
-    @story_comment = StoryComment.new(comment_id: story_comment_params)
+    @story_comment = StoryComment.new(story_comment_params)
     @story_comment.user_id = current_user.id
     @story_comment.story_id = @story.id
     @user = @story.user
     @story_comments = @story.story_comments.order(id: "DESC").page(params[:page])
     @comments = Comment.all.where(is_deleted: false)
     if @story_comment.save
-      redirect_to request.referer
+      redirect_to story_path(@story.id)
     else
       render "public/stories/show"
     end
@@ -20,7 +20,7 @@ class Public::StoryCommentsController < ApplicationController
     @story_comment = StoryComment.find(params[:id])
     @story = @story_comment.story
     if @story_comment.destroy
-      redirect_to request.referer
+      redirect_to story_path(@story.id)
     else
       render "public/stories/show"
     end
@@ -29,7 +29,7 @@ class Public::StoryCommentsController < ApplicationController
   private
 
   def story_comment_params
-    params.permit(:comment_id)
+    params.require(:story_comment).permit(:comment_id)
   end
 
   def authenticate

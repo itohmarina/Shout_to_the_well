@@ -5,6 +5,7 @@
       <%= image_tag story_comment.user.get_user_image, size:"30x30", class:"rounded-circle border border-warning" %>
       <div  class="story-comment">
         <%= story_comment.comment.body %>
+        <%= story_comment.created_at.strftime('%Y/%m/%d') %>
         <% if story_comment.user == current_user %>
           <%= link_to "コメント削除", story_story_comment_path(story.id, story_comment.id), data: { confirm: '本当に消しますか？' }, method: :delete %>
         <% end %>
@@ -15,13 +16,13 @@
 <%= paginate story_comments %>
 <div class="comment-form">
   <h6>送りたいコメントを選んでください</h6>
-  <%= form_with model:[story, story_comment], method: :post do |f| %>
+  <%= form_with(scope: :story_comment, model:[story, story_comment], method: :post) do |f| %>
     <% comments.each do |comment| %>
       <div>
         <%= f.radio_button :comment_id, comment.id %>
         <%= f.label :comment_id, comment.body %>
       </div>
     <% end %>
-    <%= f.submit "送信", class:"btn btn-primary" %>
+    <%= f.submit "送信", class: "btn btn-primary" %>
   <% end %>
 </div>
